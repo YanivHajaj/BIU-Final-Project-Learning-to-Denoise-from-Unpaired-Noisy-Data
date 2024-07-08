@@ -1,0 +1,19 @@
+{
+    "exp_detail": "Train Noisier2Noise Model",
+    "gpu_num": 0,
+    "seed": 100,
+    "load_model": false,
+    "load_exp_num": 1,
+    "load_epoch": 500,
+    "n_epochs": 500,
+    "start_epoch": 0,
+    "decay_epoch": 150,
+    "batch_size": 4,
+    "lr": 0.001,
+    "noise": "gauss_25",
+    "crop": true,
+    "patch_size": 256,
+    "normalize": true,
+    "mean": 0.405,
+    "std": 0.2927
+}
