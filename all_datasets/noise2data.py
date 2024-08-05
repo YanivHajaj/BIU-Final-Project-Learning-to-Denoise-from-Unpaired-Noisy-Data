@@ -48,8 +48,8 @@ def process_images(input_folder, output_folder, mean=0, std=25):
             print(f"Processed {filename}")
 
 # Define input and output folders
-input_folder = 'all_datasets/new_pictures/data/natural_images/person'
-output_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
+input_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
+output_folder = 'all_datasets/noiser_pics/new_pictures/data/natural_images/person'
 
 # Process the images with Gaussian noise
-process_images(input_folder, output_folder, mean=0, std=80)
+process_images(input_folder, output_folder, mean=0, std=25)
