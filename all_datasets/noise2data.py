@@ -47,9 +47,33 @@ def process_images(input_folder, output_folder, mean=0, std=25):
 
             print(f"Processed {filename}")
 
-# Define input and output folders
-input_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
-output_folder = 'all_datasets/noiser_pics/new_pictures/data/natural_images/person'
 
-# Process the images with Gaussian noise
-process_images(input_folder, output_folder, mean=0, std=25)
+def convert_jpg_to_png(input_folder, output_folder):
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    for filename in os.listdir(input_folder):
+        if filename.endswith(".jpg") or filename.endswith(".jpeg"):
+            img = Image.open(os.path.join(input_folder, filename))
+            png_filename = os.path.splitext(filename)[0] + ".png"
+            img.save(os.path.join(output_folder, png_filename))
+            print(f"Converted {filename} to {png_filename}")
+
+
+
+def convert():
+    input_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
+    output_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
+
+    convert_jpg_to_png(input_folder, output_folder)
+
+
+def noise():
+    # Define input and output folders
+    input_folder = 'all_datasets/noise_pics/new_pictures/data/natural_images/person'
+    output_folder = 'all_datasets/noiser_pics/new_pictures/data/natural_images/person'
+
+    # Process the images with Gaussian noise
+    process_images(input_folder, output_folder, mean=0, std=25)
+
+convert()
