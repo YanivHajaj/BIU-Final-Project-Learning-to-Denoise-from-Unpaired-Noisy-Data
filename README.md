@@ -41,26 +41,33 @@ Run the command
    ```
 
 # Test
-Run the command 
+
+Testing the Model
+Once you have trained your Noisier2Noise model, you can evaluate its performance on a test dataset to see how well it can denoise new images. This section will guide you on how to prepare the test data and run the test script.
+
+Preparing the Test Data
+Create a Dataset Folder:
+
+Inside the all_datasets directory, create a new folder for your test dataset. For example, if you want to name your dataset Set19, the path would be ./all_datasets/Set19.
+Add Test Images:
+
+Place your test images inside the Set19 folder. Ensure that all images are in PNG format.
+These images should be clean (noise-free) if you want to evaluate the model's performance against a ground truth. Alternatively, you can use noisy images to simply observe the denoising capability of the model.
+Running the Test Script
+To test the model on the Set19 dataset, use the following command in your terminal or command prompt:
+
+Run the command (for example)
    ```bash
-
-
+  python test.py --exp_num 2 --n_epochs 500 --gpu_num 0 --dataset Set19
    ```
 
+--exp_num: This should match the experiment number where your trained model is saved. For example, if your model is saved under exp2, set --exp_num to 2.
 
+--n_epochs: This should be the number of epochs at which your model was saved. If your checkpoint is saved at 500 epochs, set --n_epochs to 500.
 
+--gpu_num: Set this to 0 to use the first GPU. If you are running the test on a CPU, you can ignore this parameter.
 
-
-
-
-
-
-
-
-Here's a comprehensive README file for the `Noisier2Noise` project, which includes theoretical information, usage examples, and instructions on how to run the code.
-
-Complete it where needed!! Check all the information in here!
-
+--dataset: Set this to the name of the folder where your test images are stored (Set19).
 
 # Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
@@ -246,8 +253,10 @@ train_instance.train()
 - **`mean` and `std`**: Mean and standard deviation for normalization (based on the ImageNet dataset).
 
 ## Results and Evaluation
-
 The Noisier2Noise method has been tested on various datasets, including the Kodak image set, and compared against other denoising methods such as Noise2Noise and BM3D. The results show that Noisier2Noise can achieve competitive performance, particularly in scenarios where obtaining clean images is impractical.
+
+## How to Evaluat (run test.py)
+
 
 ### Performance Metrics
 
