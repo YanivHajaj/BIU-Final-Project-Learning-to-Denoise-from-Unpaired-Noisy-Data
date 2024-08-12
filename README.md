@@ -1,75 +1,16 @@
 # BIU-University-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data
-Our final project
+Final project BIU - Computer Engineering
+- Samy Nehmad (samy.nehmad1@gmail.com)
+- Yaniv Hajaj (yaniv3456@gmail.com)
 
-# Noisier2Noise
-Self-Supervised Image Denoising
-- Paper Summary
-'https://www.notion.so/2020-Noisier2Noise-e87b5fb59368443ca4e203dfe4c7e9a5'
+# Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
 Article:
 'https://arxiv.org/pdf/1910.11908'
 
-
 Google Collab:
 'https://colab.research.google.com/drive/1sJZCjDE0pUqGdUy00lxeBeDjobP2RBTf?hl=en#scrollTo=p-5QGYTVRN6Y'
 
-1. Train Dataset: ImageNet 1000
-2. Test Dataset: BSD100, Kodak, Set12
-
-
-# Train:
-Run the command 
-   ```bash
-   python Noisier2Noise-main/train.py \
-    --exp_detail "Train Nr2N public" \
-    --gpu_num 0 \
-    --seed 100 \
-    --load_model False \
-    --load_exp_num 1 \
-    --load_epoch 500 \
-    --n_epochs 500 \
-    --start_epoch 0 \
-    --decay_epoch 150 \
-    --batch_size 4 \
-    --lr 0.001 \
-    --noise "gauss_25" \
-    --crop True \
-    --patch_size 256 \
-    --normalize True \
-    --mean 0.4050 \
-    --std 0.2927
-   ```
-
-# Test
-
-Testing the Model
-Once you have trained your Noisier2Noise model, you can evaluate its performance on a test dataset to see how well it can denoise new images. This section will guide you on how to prepare the test data and run the test script.
-
-Preparing the Test Data
-Create a Dataset Folder:
-
-Inside the all_datasets directory, create a new folder for your test dataset. For example, if you want to name your dataset Set19, the path would be ./all_datasets/Set19.
-Add Test Images:
-
-Place your test images inside the Set19 folder. Ensure that all images are in PNG format.
-These images should be clean (noise-free) if you want to evaluate the model's performance against a ground truth. Alternatively, you can use noisy images to simply observe the denoising capability of the model.
-Running the Test Script
-To test the model on the Set19 dataset, use the following command in your terminal or command prompt:
-
-Run the command (for example)
-   ```bash
-  python test.py --exp_num 2 --n_epochs 500 --gpu_num 0 --dataset Set19
-   ```
-
---exp_num: This should match the experiment number where your trained model is saved. For example, if your model is saved under exp2, set --exp_num to 2.
-
---n_epochs: This should be the number of epochs at which your model was saved. If your checkpoint is saved at 500 epochs, set --n_epochs to 500.
-
---gpu_num: Set this to 0 to use the first GPU. If you are running the test on a CPU, you can ignore this parameter.
-
---dataset: Set this to the name of the folder where your test images are stored (Set19).
-
-# Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
 ## Introduction
 
@@ -144,7 +85,7 @@ To use the Noisier2Noise code, you'll need to have Python and the necessary libr
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/Noisier2Noise.git
+   git clone https://github.com/YanivHajaj/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data.git
    cd Noisier2Noise-main
    ```
 
@@ -163,12 +104,16 @@ To use the Noisier2Noise code, you'll need to have Python and the necessary libr
 To train the model using the Noisier2Noise approach, you can use the `train.py` script. Below is an example command to start training:
 
 ```bash
-python train.py \
-    --exp_detail "Training Noisier2Noise Model" \
+   python Noisier2Noise-main/train.py \
+    --exp_detail "Train Nr2N public" \
     --gpu_num 0 \
     --seed 100 \
     --load_model False \
+    --load_exp_num 1 \
+    --load_epoch 500 \
     --n_epochs 500 \
+    --start_epoch 0 \
+    --decay_epoch 150 \
     --batch_size 4 \
     --lr 0.001 \
     --noise "gauss_25" \
@@ -181,7 +126,30 @@ python train.py \
 
 ### Testing the Model
 
-Once the model is trained, you can test its performance on a dataset using the `test.py` script. Below is an example of how to run the test script:
+Once you have trained your Noisier2Noise model, you can evaluate its performance on a test dataset to see how well it can denoise new images. This section will guide you on how to prepare the test data and run the test script.
+
+Preparing the Test Data
+Create a Dataset Folder:
+
+Inside the all_datasets directory, create a new folder for your test dataset. For example, if you want to name your dataset Set19, the path would be ./all_datasets/Set19.
+Add Test Images:
+
+Place your test images inside the Set19 folder. Ensure that all images are in PNG format.
+These images should be clean (noise-free) if you want to evaluate the model's performance against a ground truth. Alternatively, you can use noisy images to simply observe the denoising capability of the model.
+Running the Test Script
+To test the model on the Set19 dataset, use the following command in your terminal or command prompt:
+
+Run the command (for example)
+   ```bash
+  python test.py --exp_num 4 --n_epochs 500 --gpu_num 0 --dataset Set20
+   ```
+
+--exp_num: This should match the experiment number where your trained model is saved. For example, if your model is saved under exp2, set --exp_num to 2.
+--n_epochs: This should be the number of epochs at which your model was saved. If your checkpoint is saved at 500 epochs, set --n_epochs to 500.
+--gpu_num: Set this to 0 to use the first GPU. If you are running the test on a CPU, you can ignore this parameter.
+--dataset: Set this to the name of the folder where your test images are stored (Set19).
+
+An example containing all the parameters:
 
 ```bash
 python test.py \

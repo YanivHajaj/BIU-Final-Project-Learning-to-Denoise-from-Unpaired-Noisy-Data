@@ -37,7 +37,9 @@ opt = parser.parse_args()
 
 
 def generate(args):
-    device = torch.device('cuda:{}'.format(args.gpu_num))
+    #device = torch.device('cuda:{}'.format(args.gpu_num))
+    ##~~~~~~~~~~~~~~~~~~ for my computer (dont have nvidia GPU) use my cpu
+    device = torch.device('cpu')
 
     # Random Seeds
     torch.manual_seed(args.seed)
@@ -46,7 +48,7 @@ def generate(args):
 
     # Model
     model = DnCNN().to(device)
-    model.load_state_dict(torch.load('./experiments/exp{}/checkpoints/{}epochs.pth'.format(args.exp_num, args.n_epochs), map_location=device))
+    model.load_state_dict(torch.load('../experiments/exp{}/checkpoints/{}epochs.pth'.format(args.exp_num, args.n_epochs), map_location=device))
     model.eval()
 
     # Directory
@@ -57,7 +59,27 @@ def generate(args):
 
     # Images
     img_paths = glob(os.path.join(img_dir, '*.png'))
-    imgs = [cv2.imread(p, cv2.IMREAD_GRAYSCALE) for p in img_paths]
+    imgs = []
+
+    for p in img_paths:
+        img = cv2.imread(p)
+        # Convert to grayscale if the image is in RGB
+        if len(img.shape) == 3 and img.shape[2] == 3:
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        
+        # Ensure consistent size by padding
+        desired_height = 256
+        desired_width = 256
+        padded_img = cv2.copyMakeBorder(
+            img,
+            0,
+            max(0, desired_height - img.shape[0]),
+            0,
+            max(0, desired_width - img.shape[1]),
+            cv2.BORDER_CONSTANT,
+            value=0
+        )
+        imgs.append(padded_img)
 
     # Noise
     noise_type = args.noise.split('_')[0]
@@ -152,6 +174,11 @@ def generate(args):
 
             noisier_tensor = transform(noisier_numpy)
             noisier_tensor = torch.unsqueeze(noisier_tensor, dim=0)
+
+            # Resize noisier_tensor if necessary
+            expected_shape = noisier[i, :, :, :].shape
+            noisier_tensor = noisier_tensor.view(expected_shape)  # Reshape to match the expected shape
+
             noisier[i, :, :, :] = noisier_tensor
 
         noisier = noisier.type(torch.FloatTensor).to(device)
