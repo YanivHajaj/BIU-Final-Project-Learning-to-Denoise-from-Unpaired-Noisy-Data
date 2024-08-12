@@ -24,7 +24,7 @@ parser.add_argument('--n_epochs', default=180, type=int)  # Number of epochs for
 # Test parameters (used for evaluating the model)
 parser.add_argument('--noise', default='poisson_50', type=str)  # Type and intensity of noise to add to images
 parser.add_argument('--dataset', default='Set12', type=str)  # Dataset to use for testing (e.g., Set12, BSD100, etc.)
-parser.add_argument('--aver_num', default=10, type=int)  # Number of noisy images to average in overlap prediction
+parser.add_argument('--aver_num', default=20, type=int)  # Number of noisy images to average in overlap prediction
 parser.add_argument('--alpha', default=1.0, type=float)  # A parameter controlling the amount of noise added
 
 # Image transformation parameters
@@ -165,12 +165,15 @@ def generate(args):
         # Optional: Perform overlap prediction by averaging the predictions from multiple noisy versions
         start3 = time.time()
         noisier = torch.zeros(size=(args.aver_num, 1, *clean_numpy.shape))  # Initialize a tensor to store multiple noisy versions
+        if noise_type == 'gauss':
+            noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
+        elif noise_type == 'poisson':
+            noisy_numpy = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
+
         for i in range(args.aver_num):
             if noise_type == 'gauss':
-                noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
                 noisier_numpy = noisy_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity * args.alpha
             elif noise_type == 'poisson':
-                noisy_numpy = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
                 noisier_numpy = noisy_numpy + (np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255. - clean_numpy)
             else:
                 raise NotImplementedError('wrong type of noise')
