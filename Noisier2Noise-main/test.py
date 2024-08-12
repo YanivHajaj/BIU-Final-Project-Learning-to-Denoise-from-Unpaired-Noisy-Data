@@ -58,7 +58,7 @@ def generate(args):
         os.mkdir(save_dir)
 
     # Images
-    img_paths = glob(os.path.join(img_dir, '*.png'))
+    img_paths = glob(os.path.join(img_dir, '*.png')) + glob(os.path.join(img_dir, '*.jpg'))  # Include both PNG and JPG
     imgs = []
 
     for p in img_paths:
