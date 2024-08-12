@@ -124,7 +124,8 @@ To train the model using the Noisier2Noise approach, you can use the `train.py` 
     --std 0.2927
 ```
 
-Or edit the file model_train.py with the desired parameters.
+Or edit the file `model_train.py` with the desired parameters and run it `python model_train.py`
+
 Note that for the time being the dataset used for training is all_datasets/ImageNet_1000_Gray/train/
 
 ### Testing the Model
@@ -174,61 +175,53 @@ python test.py \
 
 This command will load the trained model, apply it to the specified dataset, and output the denoised images along with performance metrics such as PSNR and SSIM.
 
-### Example Code
-
-Here is an example of how to set up and train the model programmatically within a Python script:
-
-```python
-import sys
-sys.path.append('Noisier2Noise-main')
-
-from train import TrainNr2N
-import argparse
-
-args = argparse.Namespace(
-    exp_detail='Train Nr2N public',
-    gpu_num=0,
-    seed=100,
-    load_model=False,
-    load_exp_num=1,
-    load_epoch=500,
-    n_epochs=500,
-    start_epoch=0,
-    decay_epoch=150,
-    batch_size=4,
-    lr=1e-3,
-    noise='gauss_25',
-    crop=True,
-    patch_size=256,
-    normalize=True,
-    mean=0.4050,
-    std=0.2927
-)
-
-train_instance = TrainNr2N(args)
-train_instance.train()
-```
 
 ### Explanation of Key Arguments
+
+Certainly! Here’s the completion for the missing arguments in your README:
+
+### Explanation of Key Arguments
+
+#### For `test.py`:
+
+- **`gpu_num`**: The GPU index to use (set to `0` for the first GPU).
+- **`seed`**: Seed for random number generation for reproducibility.
+- **`exp_num`**: Experiment number to identify the specific experiment configuration (used for saving and loading results).
+- **`n_epochs`**: Number of epochs for which the model was trained. This is used to specify which checkpoint to load.
+- **`noise`**: The type and intensity of noise to apply (e.g., `poisson_50` for Poisson noise with a specified intensity).
+- **`dataset`**: The name of the dataset to be used for testing (e.g., `Set12`).
+- **`aver_num`**: Number of times to average the results for a more stable performance evaluation.
+- **`alpha`**: Scaling factor used in the Noisier2Noise method to control the intensity of the additional synthetic noise.
+- **`crop`**: Whether to crop the images during testing (same as in training).
+- **`patch_size`**: Size of the image patches to use for testing.
+- **`normalize`**: Whether to normalize the image data.
+- **`mean` and `std`**: Mean and standard deviation for normalization.
+- **`use_overlap`**: Whether to use overlap between patches during testing, which can help in smoothing out the final predictions.
+
+#### For `train.py`:
 
 - **`exp_detail`**: Description of the experiment.
 - **`gpu_num`**: The GPU index to use (set to `0` for the first GPU).
 - **`seed`**: Seed for random number generation for reproducibility.
 - **`load_model`**: Whether to load a pre-trained model.
+- **`load_exp_num`**: The experiment number to identify which pre-trained model to load.
+- **`load_epoch`**: The specific epoch checkpoint to load the pre-trained model from.
 - **`n_epochs`**: Number of epochs to train the model.
+- **`start_epoch`**: Epoch to start training from, which is useful if continuing training from a checkpoint.
+- **`decay_epoch`**: The epoch after which the learning rate starts decaying.
 - **`batch_size`**: Number of samples per batch.
 - **`lr`**: Learning rate for the optimizer.
-- **`noise`**: The type and intensity of noise to apply (e.g., `gauss_25` for Gaussian noise with a standard deviation of 25).
+- **`noise`**: The type and intensity of noise to apply during training.
 - **`crop`**: Whether to crop the images during training.
 - **`patch_size`**: Size of the image patches to use for training.
 - **`normalize`**: Whether to normalize the image data.
-- **`mean` and `std`**: Mean and standard deviation for normalization (based on the ImageNet dataset).
+- **`mean` and `std`**: Mean and standard deviation for normalization.
+
 
 ## Results and Evaluation
 The Noisier2Noise method has been tested on various datasets, including the Kodak image set, and compared against other denoising methods such as Noise2Noise and BM3D. The results show that Noisier2Noise can achieve competitive performance, particularly in scenarios where obtaining clean images is impractical.
 
-## How to Evaluat (run test.py)
-
+## How to Evaluate (run test.py)
 
 ### Performance Metrics
 
@@ -237,10 +230,11 @@ The Noisier2Noise method has been tested on various datasets, including the Koda
 
 ### Visual Results
 
-The following images demonstrate the effectiveness of the Noisier2Noise approach:
-- **Clean Image**: The original clean image (not used in training).
+The following images demonstrate the effectiveness of the Noisier2Noise approach (results folder):
+- **Clean Image**: The original clean image (not used in training/testing).
 - **Noisy Image**: The input image with noise added.
-- **Denoised Image**: The output from the Noisier2Noise model.
+- **Outputs Image**: The output from the Noisier2Noise model.
+- **Overlap Image**: The overlapping Noisier2Noise model outputs (aver_num times).
 
 ## References
 
