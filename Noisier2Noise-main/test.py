@@ -33,9 +33,69 @@ parser.add_argument('--patch_size', type=int, default=256)  # Size of the image 
 parser.add_argument('--normalize', type=bool, default=True)  # Whether to normalize images
 parser.add_argument('--mean', type=float, default=0.4050)  # Mean value for normalization (ImageNet Gray: 0.4050)
 parser.add_argument('--std', type=float, default=0.2927)  # Standard deviation for normalization (ImageNet Gray: 0.2927)
+parser.add_argument('--use_overlap', type=bool, default=True)  # Whether to use the overlap prediction step
 
 # Parse the command-line arguments into a variable called `opt`
 opt = parser.parse_args()
+
+# Optional function to perform overlap prediction using Method 1 or Method 2
+def perform_overlap_prediction(model, noisier, transform, device, args, clean_numpy, method=2):
+    if method == 1:
+        # Method 1: Accumulate predictions from multiple noisy versions
+        overlap = None
+
+        if args.noise.split('_')[0] == 'gauss':
+            noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * (float(args.noise.split('_')[1]) / 255.)
+        elif args.noise.split('_')[0] == 'poisson':
+            noisy_numpy = np.random.poisson(clean_numpy * 255. * (float(args.noise.split('_')[1]) / 255.)) / (float(args.noise.split('_')[1]) / 255.) / 255.
+
+        for _ in range(args.aver_num):
+            if args.noise.split('_')[0] == 'gauss':
+                noisier_numpy = noisy_numpy + np.random.randn(*clean_numpy.shape) * (float(args.noise.split('_')[1]) / 255.) * args.alpha
+            elif args.noise.split('_')[0] == 'poisson':
+                noisier_numpy = noisy_numpy + (np.random.poisson(clean_numpy * 255. * (float(args.noise.split('_')[1]) / 255.)) / (float(args.noise.split('_')[1]) / 255.) / 255. - clean_numpy)
+            else:
+                raise NotImplementedError('wrong type of noise')
+            
+            noisier_tensor = transform(noisier_numpy)
+            noisier_tensor = torch.unsqueeze(noisier_tensor, dim=0).type(torch.FloatTensor).to(device)
+            single_prediction = ((1 + args.alpha ** 2) * model(noisier_tensor) - noisier_tensor) / (args.alpha ** 2)
+
+            if overlap is None:
+                overlap = single_prediction.detach() / args.aver_num
+            else:
+                overlap += single_prediction.detach() / args.aver_num
+        
+        return overlap
+
+    elif method == 2:
+        # Method 2: Directly average predictions from stored noisy versions
+        noisier = torch.zeros(size=(args.aver_num, 1, *clean_numpy.shape))
+
+        if args.noise.split('_')[0] == 'gauss':
+            noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * (float(args.noise.split('_')[1]) / 255.)
+        elif args.noise.split('_')[0] == 'poisson':
+            noisy_numpy = np.random.poisson(clean_numpy * 255. * (float(args.noise.split('_')[1]) / 255.)) / (float(args.noise.split('_')[1]) / 255.) / 255.
+
+        for i in range(args.aver_num):
+            if args.noise.split('_')[0] == 'gauss':
+                noisier_numpy = noisy_numpy + np.random.randn(*clean_numpy.shape) * (float(args.noise.split('_')[1]) / 255.) * args.alpha
+            elif args.noise.split('_')[0] == 'poisson':
+                noisier_numpy = noisy_numpy + (np.random.poisson(clean_numpy * 255. * (float(args.noise.split('_')[1]) / 255.)) / (float(args.noise.split('_')[1]) / 255.) / 255. - clean_numpy)
+            else:
+                raise NotImplementedError('wrong type of noise')
+            
+            noisier_tensor = transform(noisier_numpy)
+            noisier_tensor = torch.unsqueeze(noisier_tensor, dim=0).type(torch.FloatTensor).to(device)
+            noisier[i, :, :, :] = noisier_tensor.view(noisier[i, :, :, :].shape)
+        
+        noisier = noisier.type(torch.FloatTensor).to(device)
+        overlap = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
+        overlap = torch.mean(overlap, dim=0)
+        return overlap
+
+    else:
+        raise ValueError("Invalid method selected for overlap prediction.")
 
 # Main function that performs image denoising and evaluation
 def generate(args):
@@ -132,83 +192,33 @@ def generate(args):
         elapsed2 = time.time() - start2
         avg_time2 += elapsed2 / len(imgs)
 
-        # # Method 1
-        # overlap = None
-        # for _ in range(args.aver_num):
-        #     if noise_type == 'gauss':
-        #         noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
-        #         noisier_numpy = noisy_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
-        #     elif noise_type == 'poisson':
-        #         noisy_numpy = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
-        #         # 1. Add Poisson
-        #         noisier_numpy = noisy_numpy + (np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255. - clean_numpy)
-        #         # 2. Add Gaussian approximation
-        #         # noisier = noisy + np.random.randn(*clean.shape) *
-        #     else:
-        #         raise NotImplementedError('wrong type of noise')
-        #
-        #     noisy, noisier = transform(noisy_numpy), transform(noisier_numpy)
-        #     noisy, noisier = torch.unsqueeze(noisy, dim=0), torch.unsqueeze(noisier, dim=0)
-        #     noisy, noisier = noisy.type(torch.FloatTensor).to(device), noisier.type(torch.FloatTensor).to(device)
-        #
-        #     with torch.no_grad():
-        #         single_prediction = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
-        #     if overlap is None:
-        #         overlap = single_prediction.detach() / args.aver_num
-        #     else:
-        #         overlap += single_prediction.detach() / args.aver_num
-        #     del single_prediction
-
-        # overlap = noisy
-
-        # # Method 2
-        # Optional: Perform overlap prediction by averaging the predictions from multiple noisy versions
-        start3 = time.time()
-        noisier = torch.zeros(size=(args.aver_num, 1, *clean_numpy.shape))  # Initialize a tensor to store multiple noisy versions
-        if noise_type == 'gauss':
-            noisy_numpy = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
-        elif noise_type == 'poisson':
-            noisy_numpy = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
-
-        for i in range(args.aver_num):
-            if noise_type == 'gauss':
-                noisier_numpy = noisy_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity * args.alpha
-            elif noise_type == 'poisson':
-                noisier_numpy = noisy_numpy + (np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255. - clean_numpy)
-            else:
-                raise NotImplementedError('wrong type of noise')
-
-            # Transform and store each noisy version
-            noisier_tensor = transform(noisier_numpy)
-            noisier_tensor = torch.unsqueeze(noisier_tensor, dim=0)
-
-            # Resize the tensor if necessary
-            expected_shape = noisier[i, :, :, :].shape
-            noisier_tensor = noisier_tensor.view(expected_shape)
-
-            noisier[i, :, :, :] = noisier_tensor  # Store the noisy tensor
-
-        noisier = noisier.type(torch.FloatTensor).to(device)
-        overlap = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
-        overlap = torch.mean(overlap, dim=0)  # Average the predictions to get the final overlap prediction
-
-        elapsed3 = time.time() - start3
-        avg_time3 += elapsed3 / len(imgs)
+        # Optional: Perform overlap prediction if specified
+        if args.use_overlap:
+            start3 = time.time()
+            overlap = perform_overlap_prediction(model, noisier, transform, device, args, clean_numpy, method=1)
+            elapsed3 = time.time() - start3
+            avg_time3 += elapsed3 / len(imgs)
+        else:
+            overlap = None  # Skip overlap calculation if not using
 
         # Convert the outputs back to numpy arrays
         if args.normalize:
             output = denorm(output, mean=args.mean, std=args.std)
             prediction = denorm(prediction, mean=args.mean, std=args.std)
-            overlap = denorm(overlap, mean=args.mean, std=args.std)
+            overlap = denorm(overlap, mean=args.mean, std=args.std) if overlap is not None else None
 
-        output, prediction, overlap = tensor_to_numpy(output), tensor_to_numpy(prediction), tensor_to_numpy(overlap)
-        output_numpy, prediction_numpy, overlap_numpy = np.squeeze(output), np.squeeze(prediction), np.squeeze(overlap)
+        output_numpy = output.detach().cpu().numpy()
+        prediction_numpy = prediction.detach().cpu().numpy()
+        overlap_numpy = overlap.detach().cpu().numpy() if overlap is not None else None
+
+        output_numpy, prediction_numpy = np.squeeze(output_numpy), np.squeeze(prediction_numpy)
+        overlap_numpy = np.squeeze(overlap_numpy) if overlap is not None else None
 
         # Calculate the PSNR (Peak Signal-to-Noise Ratio) for each stage
         n_psnr = psnr(clean_numpy, noisy_numpy, data_range=1)
         o_psnr = psnr(clean_numpy, output_numpy, data_range=1)
         p_psnr = psnr(clean_numpy, prediction_numpy, data_range=1)
-        op_psnr = psnr(clean_numpy, overlap_numpy, data_range=1)
+        op_psnr = psnr(clean_numpy, overlap_numpy, data_range=1) if overlap is not None else 0
 
         # Accumulate the PSNR scores
         noisy_psnr += n_psnr / len(imgs)
@@ -220,7 +230,7 @@ def generate(args):
         n_ssim = ssim(clean_numpy, noisy_numpy, data_range=1)
         o_ssim = ssim(clean_numpy, output_numpy, data_range=1)
         p_ssim = ssim(clean_numpy, prediction_numpy, data_range=1)
-        op_ssim = ssim(clean_numpy, overlap_numpy, data_range=1)
+        op_ssim = ssim(clean_numpy, overlap_numpy, data_range=1) if overlap is not None else 0
 
         # Accumulate the SSIM scores
         noisy_ssim += n_ssim / len(imgs)
@@ -236,12 +246,13 @@ def generate(args):
         if index <= 3:
             sample_clean, sample_noisy = 255. * np.clip(clean_numpy, 0., 1.), 255. * np.clip(noisy_numpy, 0., 1.)
             sample_output, sample_prediction = 255. * np.clip(output_numpy, 0., 1.), 255. * np.clip(prediction_numpy, 0., 1.)
-            sample_overlap = 255. * np.clip(overlap_numpy, 0., 1.)
+            sample_overlap = 255. * np.clip(overlap_numpy, 0., 1.) if overlap_numpy is not None else None
             cv2.imwrite(os.path.join(save_dir, '{}th_clean.png'.format(index+1)), sample_clean)
             cv2.imwrite(os.path.join(save_dir, '{}th_noisy.png'.format(index+1)), sample_noisy)
             cv2.imwrite(os.path.join(save_dir, '{}th_output.png'.format(index+1)), sample_output)
             cv2.imwrite(os.path.join(save_dir, '{}th_prediction.png'.format(index+1)), sample_prediction)
-            cv2.imwrite(os.path.join(save_dir, '{}th_overlap.png'.format(index+1)), sample_overlap)
+            if sample_overlap is not None:
+                cv2.imwrite(os.path.join(save_dir, '{}th_overlap.png'.format(index+1)), sample_overlap)
 
     # After processing all images, print the average PSNR and SSIM scores
     print('{} Average PSNR | noisy:{:.3f}, output:{:.3f}, prediction:{:.3f}, overlap:{:.3f}'.format(
