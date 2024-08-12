@@ -22,7 +22,7 @@ parser.add_argument('--exp_num', default=10, type=int)  # Experiment number (use
 parser.add_argument('--n_epochs', default=180, type=int)  # Number of epochs for training the model
 
 # Test parameters (used for evaluating the model)
-parser.add_argument('--noise', default='poisson_50', type=str)  # Type and intensity of noise to add to images
+parser.add_argument('--noise', default='gauss_25', type=str)  # Type and intensity of noise to add to images
 parser.add_argument('--dataset', default='Set12', type=str)  # Dataset to use for testing (e.g., Set12, BSD100, etc.)
 parser.add_argument('--aver_num', default=20, type=int)  # Number of noisy images to average in overlap prediction
 parser.add_argument('--alpha', default=1.0, type=float)  # A parameter controlling the amount of noise added

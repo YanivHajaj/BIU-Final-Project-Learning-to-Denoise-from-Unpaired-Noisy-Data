@@ -186,13 +186,3 @@ class TrainNr2N:
                     self.summary.add_scalar('avg_prediction_ssim', prediction_ssim, epoch)
 
         self.summary.close()
-
-
-
-
-
-
-
-
-
-

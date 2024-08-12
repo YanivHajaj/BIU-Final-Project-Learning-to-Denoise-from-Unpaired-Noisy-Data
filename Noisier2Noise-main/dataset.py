@@ -2,9 +2,8 @@ from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 from utils import *
 
-
 class ImageNetGray(Dataset):
-    def __init__(self, data_dir='./all_datasets/ImageNet_1000_Gray/', noise='gauss_25', train=True, transform=None):
+    def __init__(self, data_dir='../all_datasets/ImageNet_1000_Gray/', noise='gauss_25', train=True, transform=None):
         super(ImageNetGray, self).__init__()
 
         self.noise_type, self.noise_intensity = noise.split('_')[0], float(noise.split('_')[1]) / 255.

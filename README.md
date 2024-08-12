@@ -104,7 +104,7 @@ To use the Noisier2Noise code, you'll need to have Python and the necessary libr
 To train the model using the Noisier2Noise approach, you can use the `train.py` script. Below is an example command to start training:
 
 ```bash
-   python Noisier2Noise-main/train.py \
+   python train.py \
     --exp_detail "Train Nr2N public" \
     --gpu_num 0 \
     --seed 100 \
@@ -123,6 +123,9 @@ To train the model using the Noisier2Noise approach, you can use the `train.py` 
     --mean 0.4050 \
     --std 0.2927
 ```
+
+Or edit the file model_train.py with the desired parameters.
+Note that for the time being the dataset used for training is all_datasets/ImageNet_1000_Gray/train/
 
 ### Testing the Model
 
@@ -165,7 +168,8 @@ python test.py \
     --patch_size 256 \
     --normalize True \
     --mean 0.4050 \
-    --std 0.2927
+    --std 0.2927 \
+    --use_overlap True
 ```
 
 This command will load the trained model, apply it to the specified dataset, and output the denoised images along with performance metrics such as PSNR and SSIM.
