@@ -102,7 +102,11 @@ def generate(args):
     #device = torch.device('cuda:{}'.format(args.gpu_num))
     # Set the device (CPU or GPU) where the computations will happen
     # Default to CPU for simplicity (change to GPU if available)
-    device = torch.device('cpu')
+    # device = torch.device('cpu')
+
+    gpu_num = args.gpu_num
+    device = torch.device('cuda:{}'.format(gpu_num) if torch.cuda.is_available() else 'cpu')
+
 
     # Set random seeds to ensure reproducibility of results
     torch.manual_seed(args.seed)
