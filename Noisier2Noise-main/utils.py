@@ -8,6 +8,36 @@ from torchvision.transforms import transforms
 
 
 ################################# Path & Directory #################################
+def convert_to_grayscale(source_folder, target_folder):
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
+
+    for img_name in os.listdir(source_folder):
+        img_path = os.path.join(source_folder, img_name)
+        if is_image_file(img_path):  # Assuming is_image_file checks for image extensions
+            img = cv2.imread(img_path)
+            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(os.path.join(target_folder, img_name), gray_img)
+
+
+def calculate_mean_std(directory):
+    pixel_sum = 0
+    pixel_sum_squared = 0
+    num_pixels = 0
+
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        if is_image_file(filepath):
+            img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+            pixels = img.astype(np.float32) / 255.0  # Normalize to [0, 1]
+            pixel_sum += np.sum(pixels)
+            pixel_sum_squared += np.sum(pixels ** 2)
+            num_pixels += pixels.size
+
+    mean = pixel_sum / num_pixels
+    std = np.sqrt((pixel_sum_squared / num_pixels) - (mean ** 2))
+    return mean, std
+
 def is_image_file(filename):
     extensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.tif', '.TIF']
     return any(filename.endswith(extension) for extension in extensions)
