@@ -40,6 +40,6 @@ args = argparse.Namespace(
 )
 
 print(f'the mean is : {mean},the std is :{std}')
-# # Initialize and train the model
-# train_instance = TrainNr2N(args)
-# train_instance.train()
+# Initialize and train the model
+train_instance = TrainNr2N(args)
+train_instance.train()

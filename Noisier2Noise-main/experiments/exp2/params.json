@@ -1,0 +1,19 @@
+{
+    "exp_detail": "Train Nr2N public",
+    "gpu_num": 0,
+    "seed": 100,
+    "load_model": false,
+    "load_exp_num": 1,
+    "load_epoch": 500,
+    "n_epochs": 200,
+    "start_epoch": 0,
+    "decay_epoch": 50,
+    "batch_size": 4,
+    "lr": 0.0001,
+    "noise": "gauss_25",
+    "crop": true,
+    "patch_size": 256,
+    "normalize": true,
+    "mean": 0.40976835593231453,
+    "std": 0.2719549487997949
+}
