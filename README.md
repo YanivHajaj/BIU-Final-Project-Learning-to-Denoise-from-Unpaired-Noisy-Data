@@ -309,3 +309,4 @@ Contributions to the Noisier2Noise project are welcome. If you have any suggesti
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
