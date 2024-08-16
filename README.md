@@ -5,11 +5,72 @@ Final project BIU - Computer Engineering
 
 # Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
+
+## Useful Information
 Article:
 'https://arxiv.org/pdf/1910.11908'
 
 Google Collab:
 'https://colab.research.google.com/drive/1sJZCjDE0pUqGdUy00lxeBeDjobP2RBTf?hl=en#scrollTo=p-5QGYTVRN6Y'
+
+
+### Running from Collab:
+1. Clone the repo
+```bash
+!git clone https://github.com/YanivHajaj/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data.git
+```
+
+2. Navigate on the OS (if needed)
+``` python
+# navigate on the OS
+import os
+
+# Navigate to the project directory
+project_path = 'BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/Noisier2Noise-main'
+os.chdir(project_path)
+
+# List contents of the current directory
+print("Contents of project directory:", os.listdir('.'))
+```
+
+3. pip install the needed libraries
+```bash
+!pip install -r requirements.txt
+```
+
+
+### Push from Collab:
+
+1. Generate a Personal Access Token (PAT) on GitHub:
+Log in to GitHub:
+
+Go to GitHub and log in with your credentials.
+Navigate to Settings:
+
+Click on your profile picture in the top-right corner.
+Select Settings from the dropdown menu.
+Access Developer Settings:
+
+Scroll down the left-hand menu and click on Developer settings.
+Generate a New Token:
+
+Click on Personal access tokens in the left sidebar.
+Click on Tokens (classic) and then click on Generate new token.
+Give your token a descriptive name, like "Google Colab Push".
+Select Scopes:
+
+Choose the scopes or permissions you want the token to have. To push to a repository, you’ll need to select repo (full control of private repositories). You can also include other scopes if necessary.
+Click on Generate token.
+Copy the Token:
+
+GitHub will display the token once. Copy it immediately and store it securely. You won’t be able to view it again later.
+
+2. Run push command on Collab (after cloning the project)
+```bash
+!git push https://<YOUR_PAT>@github.com/YanivHajaj/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data.git
+```
+
+
 
 
 ## Introduction
