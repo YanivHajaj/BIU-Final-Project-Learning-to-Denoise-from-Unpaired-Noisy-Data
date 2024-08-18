@@ -23,7 +23,7 @@ parser.add_argument('--n_epochs', default=180, type=int)
 # Test parameters
 parser.add_argument('--noise', default='gauss_27', type=str)  # 'gauss_intensity', 'poisson_intensity'
 parser.add_argument('--dataset', default='Set12', type=str)  # BSD100, Kodak, Set12
-parser.add_argument('--aver_num', default=10, type=int)
+parser.add_argument('--aver_num', default=20, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
 
 # Transformations
