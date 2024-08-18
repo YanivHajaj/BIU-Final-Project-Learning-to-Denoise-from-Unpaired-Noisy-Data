@@ -2,9 +2,474 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e401760-daa1-4847-8e19-b2ec6b9d351e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/100epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/10epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/110epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/120epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/130epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/140epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/150epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/160epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/170epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/180epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/190epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/200epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/20epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/210epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/220epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/230epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/240epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/250epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/260epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/270epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/280epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/290epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/300epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/30epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/310epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/320epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/330epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/340epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/350epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/360epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/370epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/380epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/390epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/400epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/40epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/410epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/420epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/430epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/440epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/450epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/460epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/470epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/480epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/490epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/500epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/50epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/60epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/70epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/80epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/checkpoints/90epochs.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/params.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_100epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_105epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_10epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_110epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_115epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_120epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_125epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_130epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_135epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_140epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_145epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_150epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_155epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_15epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_160epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_165epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_170epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_175epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_180epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_185epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_190epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_195epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_200epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_205epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_20epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_210epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_215epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_220epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_225epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_230epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_235epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_240epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_245epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_250epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_255epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_25epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_260epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_265epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_270epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_275epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_280epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_285epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_290epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_295epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_300epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_305epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_30epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_310epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_315epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_320epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_325epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_330epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_335epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_340epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_345epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_350epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_355epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_35epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_360epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_365epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_370epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_375epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_380epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_385epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_390epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_395epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_400epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_405epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_40epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_410epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_415epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_420epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_425epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_430epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_435epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_440epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_445epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_450epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_455epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_45epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_460epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_465epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_470epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_475epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_480epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_485epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_490epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_495epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_500epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_50epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_55epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_5epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_60epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_65epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_70epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_75epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_80epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_85epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_90epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/clean_95epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_100epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_105epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_10epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_110epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_115epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_120epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_125epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_130epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_135epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_140epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_145epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_150epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_155epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_15epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_160epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_165epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_170epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_175epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_180epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_185epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_190epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_195epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_200epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_205epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_20epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_210epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_215epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_220epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_225epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_230epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_235epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_240epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_245epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_250epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_255epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_25epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_260epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_265epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_270epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_275epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_280epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_285epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_290epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_295epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_300epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_305epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_30epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_310epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_315epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_320epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_325epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_330epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_335epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_340epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_345epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_350epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_355epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_35epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_360epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_365epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_370epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_375epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_380epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_385epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_390epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_395epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_400epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_405epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_40epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_410epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_415epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_420epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_425epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_430epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_435epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_440epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_445epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_450epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_455epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_45epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_460epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_465epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_470epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_475epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_480epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_485epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_490epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_495epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_500epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_50epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_55epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_5epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_60epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_65epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_70epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_75epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_80epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_85epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_90epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/noisy_95epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_100epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_105epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_10epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_110epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_115epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_120epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_125epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_130epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_135epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_140epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_145epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_150epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_155epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_15epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_160epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_165epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_170epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_175epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_180epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_185epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_190epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_195epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_200epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_205epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_20epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_210epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_215epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_220epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_225epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_230epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_235epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_240epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_245epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_250epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_255epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_25epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_260epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_265epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_270epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_275epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_280epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_285epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_290epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_295epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_300epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_305epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_30epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_310epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_315epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_320epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_325epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_330epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_335epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_340epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_345epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_350epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_355epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_35epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_360epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_365epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_370epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_375epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_380epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_385epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_390epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_395epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_400epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_405epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_40epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_410epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_415epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_420epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_425epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_430epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_435epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_440epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_445epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_450epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_455epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_45epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_460epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_465epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_470epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_475epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_480epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_485epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_490epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_495epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_500epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_50epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_55epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_5epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_60epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_65epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_70epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_75epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_80epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_85epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_90epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/output_95epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_100epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_105epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_10epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_110epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_115epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_120epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_125epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_130epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_135epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_140epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_145epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_150epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_155epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_15epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_160epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_165epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_170epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_175epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_180epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_185epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_190epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_195epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_200epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_205epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_20epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_210epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_215epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_220epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_225epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_230epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_235epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_240epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_245epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_250epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_255epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_25epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_260epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_265epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_270epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_275epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_280epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_285epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_290epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_295epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_300epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_305epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_30epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_310epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_315epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_320epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_325epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_330epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_335epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_340epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_345epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_350epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_355epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_35epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_360epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_365epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_370epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_375epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_380epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_385epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_390epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_395epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_400epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_405epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_40epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_410epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_415epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_420epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_425epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_430epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_435epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_440epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_445epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_450epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_455epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_45epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_460epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_465epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_470epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_475epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_480epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_485epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_490epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_495epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_500epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_50epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_55epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_5epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_60epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_65epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_70epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_75epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_80epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_85epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_90epochs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Noisier2Noise-main/experiments/exp1/results/prediction_95epochs.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/model_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/model_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_clean.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_clean.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_noisy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_noisy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_overlap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_overlap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_prediction.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/1th_prediction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_noisy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_noisy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_overlap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_overlap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_prediction.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/2th_prediction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_noisy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_noisy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_output.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_overlap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_overlap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_prediction.png" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/results/Set20/3th_prediction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/runs/exp5/events.out.tfevents.1723701855.DESKTOP-U7QI5R2.1004.0" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/runs/exp5/events.out.tfevents.1723701855.DESKTOP-U7QI5R2.1004.0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_datasets/Set20/airplane_0000.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,13 +487,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaniv/Documents/GitHub/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/yaniv/Documents/GitHub/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/Noisier2Noise-main/experiments"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\Noisier2Noise-main\experiments" />
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set20" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\new_pictures" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -39,5 +513,16 @@
       <updated>1723683934003</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
