@@ -206,7 +206,7 @@ To test the model on the Set19 dataset, use the following command in your termin
 
 Run the command (for example)
    ```bash
-  python test.py --exp_num 4 --n_epochs 500 --gpu_num 0 --dataset Set20
+  python test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20
    ```
 
 --exp_num: This should match the experiment number where your trained model is saved. For example, if your model is saved under exp2, set --exp_num to 2.
