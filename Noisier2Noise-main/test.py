@@ -85,6 +85,9 @@ def generate(args):
         clean_numpy = clean255 / 255.
         noisy_numpy = create_noisy_image(clean_numpy, noise_type, noise_intensity)
 
+        n_psnr = psnr(clean_numpy, noisy_numpy, data_range=1)
+        n_ssim = ssim(clean_numpy, noisy_numpy, data_range=1)
+
         img_psnr_data = []
         img_ssim_data = []
 
@@ -92,25 +95,32 @@ def generate(args):
         img_psnr_csv_path = os.path.join(save_dir, 'image_{}_PSNR.csv'.format(index + 1))
         img_ssim_csv_path = os.path.join(save_dir, 'image_{}_SSIM.csv'.format(index + 1))
 
+        noisier_numpy = add_noise(noisy_numpy, clean_numpy, noise_type, noise_intensity, args.alpha)
+        noisier_tensor = transform(noisier_numpy).unsqueeze(0).type(torch.FloatTensor).to(device)
+
+        prediction = ((1 + args.alpha ** 2) * model(noisier_tensor) - noisier_tensor) / (args.alpha ** 2)
+
+        if args.normalize:
+            prediction = denorm(prediction, args.mean, args.std)
+
+        prediction_numpy = tensor_to_numpy(prediction).squeeze()
+
         for i in range(args.aver_num):
             noisier_numpy = add_noise(noisy_numpy, clean_numpy, noise_type, noise_intensity, args.alpha)
             noisier_tensor = transform(noisier_numpy).unsqueeze(0).type(torch.FloatTensor).to(device)
 
-            prediction = ((1 + args.alpha ** 2) * model(noisier_tensor) - noisier_tensor) / (args.alpha ** 2)
             overlap_mean = torch.mean(prediction, dim=0)
             overlap_median, _ = torch.median(prediction, dim=0)
 
-            if args.normalize:
-                prediction, overlap_mean, overlap_median = denorm(prediction, args.mean, args.std), denorm(overlap_mean, args.mean, args.std), denorm(overlap_median, args.mean, args.std)
+            overlap_mean, overlap_median = denorm(overlap_mean, args.mean, args.std), denorm(overlap_median, args.mean, args.std)
 
-            prediction_numpy, overlap_mean_numpy, overlap_median_numpy = tensor_to_numpy(prediction).squeeze(), tensor_to_numpy(overlap_mean).squeeze(), tensor_to_numpy(overlap_median).squeeze()
+            overlap_mean_numpy, overlap_median_numpy = tensor_to_numpy(overlap_mean).squeeze(), tensor_to_numpy(overlap_median).squeeze()
 
-            n_psnr = psnr(clean_numpy, noisy_numpy, data_range=1)
-            p_psnr = psnr(clean_numpy, prediction_numpy, data_range=1)
+
+            p_psnr = psnr(clean_numpy, prediction_numpy, data_range=1) 
             op_mean_psnr = psnr(clean_numpy, overlap_mean_numpy, data_range=1)
             op_median_psnr = psnr(clean_numpy, overlap_median_numpy, data_range=1)
 
-            n_ssim = ssim(clean_numpy, noisy_numpy, data_range=1)
             p_ssim = ssim(clean_numpy, prediction_numpy, data_range=1)
             op_mean_ssim = ssim(clean_numpy, overlap_mean_numpy, data_range=1)
             op_median_ssim = ssim(clean_numpy, overlap_median_numpy, data_range=1)
