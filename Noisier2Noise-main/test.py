@@ -21,9 +21,9 @@ parser.add_argument('--exp_num', default=10, type=int)
 parser.add_argument('--n_epochs', default=180, type=int)
 
 # Test parameters
-parser.add_argument('--noise', default='gauss_27', type=str)  # 'gauss_intensity', 'poisson_intensity'
+parser.add_argument('--noise', default='gauss_25', type=str)  # 'gauss_intensity', 'poisson_intensity'
 parser.add_argument('--dataset', default='Set12', type=str)  # BSD100, Kodak, Set12
-parser.add_argument('--aver_num', default=30, type=int)
+parser.add_argument('--aver_num', default=20, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
 
 # Transformations
@@ -198,13 +198,13 @@ def generate(args):
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_median.png'.format(index+1)), sample_overlap_median)
             cv2.imwrite(os.path.join(save_dir, '{}th_noisier.png'.format(index + 1)),sample_noisier)  # Save noisier image
 
-        # Total PSNR, SSIM
-        print('{} Average PSNR | noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
-            args.dataset, noisy_psnr, prediction_psnr, overlap_psnr_mean, overlap_psnr_median))
-        print('{} Average SSIM | noisy:{:.3f},  prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
-            args.dataset, noisy_ssim, prediction_ssim, overlap_ssim_mean, overlap_ssim_median))
-        print('Average Time for Prediction | denoised:{}'.format(avg_time2))
-        print('Average Time for Overlap | denoised:{}'.format(avg_time3))
+    # Total PSNR, SSIM
+    print('{} Average PSNR | noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
+        args.dataset, noisy_psnr, prediction_psnr, overlap_psnr_mean, overlap_psnr_median))
+    print('{} Average SSIM | noisy:{:.3f},  prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
+        args.dataset, noisy_ssim, prediction_ssim, overlap_ssim_mean, overlap_ssim_median))
+    print('Average Time for Prediction | denoised:{}'.format(avg_time2))
+    print('Average Time for Overlap | denoised:{}'.format(avg_time3))
 
 
 if __name__ == "__main__":
