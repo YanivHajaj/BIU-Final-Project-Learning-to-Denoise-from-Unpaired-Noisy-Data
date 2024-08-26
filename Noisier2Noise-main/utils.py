@@ -133,3 +133,6 @@ class LambdaLR:
     def step(self, epoch):
         return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch)/(self.n_epochs - self.decay_start_epoch)
 
+
+if __name__ == "__main__":
+    convert_to_grayscale('/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20', '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20')

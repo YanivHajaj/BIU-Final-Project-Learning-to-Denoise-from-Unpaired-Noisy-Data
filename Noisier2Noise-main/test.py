@@ -2,6 +2,9 @@ import argparse
 import random
 import time
 from glob import glob
+import csv
+import os
+
 
 import torch
 from skimage.metrics import peak_signal_noise_ratio as psnr
@@ -14,7 +17,7 @@ from utils import *
 parser = argparse.ArgumentParser(description='Test Nr2N public')
 
 parser.add_argument('--gpu_num', default=0, type=int)
-parser.add_argument('--seed', default=100, type=int)
+parser.add_argument('--seed', default=90, type=int)
 parser.add_argument('--exp_num', default=10, type=int)
 
 # Model parameters
@@ -183,6 +186,42 @@ def generate(args):
         print('{}th image | PSNR: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, noisier:{:.3f} | SSIM: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, noisier:{:.3f}'.format(
                 index + 1, n_psnr, p_psnr, op_mean_psnr, op_median_psnr, noisier_psnr, n_ssim, p_ssim, op_mean_ssim,
                 op_median_ssim, noisier_ssim))
+        
+
+            # write on SCV
+        # Define the file path
+        file_path_ssim = f'SSIM_{index}.csv'  
+        file_path_psnr = f'PSNR_{index}.csv'  
+
+
+        # Check if the file exists
+        file_exists = os.path.isfile(file_path_ssim)
+
+        with open(file_path_ssim, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            
+            # If the file doesn't exist, write the header
+            if not file_exists:
+                writer.writerow(['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median']) 
+            
+            # Write data to the CSV
+            writer.writerow([args.aver_num, n_ssim, p_ssim, op_mean_ssim, op_median_ssim])  
+
+
+        # Check if the file exists
+        file_exists = os.path.isfile(file_path_psnr)
+
+        with open(file_path_psnr, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            
+            # If the file doesn't exist, write the header
+            if not file_exists:
+                writer.writerow(['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median'])  
+            
+            # Write data to the CSV
+            writer.writerow([args.aver_num, n_psnr, p_psnr, op_mean_psnr, op_median_psnr])  
+
+
 
         # Save sample images
         if index <= 3:
@@ -205,6 +244,40 @@ def generate(args):
         args.dataset, noisy_ssim, prediction_ssim, overlap_ssim_mean, overlap_ssim_median))
     print('Average Time for Prediction | denoised:{}'.format(avg_time2))
     print('Average Time for Overlap | denoised:{}'.format(avg_time3))
+
+
+    # write average SSIM per k
+    file_path = f'SSIM_all_images_average.csv'  
+
+    # Check if the file exists
+    file_exists = os.path.isfile(file_path)
+
+    with open(file_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        
+        # If the file doesn't exist, write the header
+        if not file_exists:
+            writer.writerow(['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median'])  # Add your header here
+        
+        # Write data to the CSV
+        writer.writerow([args.aver_num, noisy_ssim, prediction_ssim, overlap_ssim_mean, overlap_ssim_median])  # Add your data here
+
+
+    # write average SSIM per k
+    file_path = f'PSNR_all_images_average.csv'  
+
+    # Check if the file exists
+    file_exists = os.path.isfile(file_path)
+
+    with open(file_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        
+        # If the file doesn't exist, write the header
+        if not file_exists:
+            writer.writerow(['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median'])  # Add your header here
+        
+        # Write data to the CSV
+        writer.writerow([args.aver_num, noisy_psnr, prediction_psnr, overlap_psnr_mean, overlap_psnr_median])  # Add your data here
 
 
 if __name__ == "__main__":
