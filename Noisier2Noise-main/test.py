@@ -190,8 +190,8 @@ def generate(args):
 
             # write on SCV
         # Define the file path
-        file_path_ssim = f'SSIM_{index}.csv'  
-        file_path_psnr = f'PSNR_{index}.csv'  
+        file_path_ssim = f'./csvs/SSIM_{index}.csv'  
+        file_path_psnr = f'./csvs/PSNR_{index}.csv'  
 
 
         # Check if the file exists
@@ -247,7 +247,7 @@ def generate(args):
 
 
     # write average SSIM per k
-    file_path = f'SSIM_all_images_average.csv'  
+    file_path = f'./csvs/SSIM_all_images_average.csv'  
 
     # Check if the file exists
     file_exists = os.path.isfile(file_path)
@@ -264,7 +264,7 @@ def generate(args):
 
 
     # write average SSIM per k
-    file_path = f'PSNR_all_images_average.csv'  
+    file_path = f'./csvs/PSNR_all_images_average.csv'  
 
     # Check if the file exists
     file_exists = os.path.isfile(file_path)

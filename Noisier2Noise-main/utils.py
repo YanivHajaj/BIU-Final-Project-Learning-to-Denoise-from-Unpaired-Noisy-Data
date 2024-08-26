@@ -2,6 +2,9 @@ import os
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
+import os
+import cv2
+import shutil
 
 import torch
 from torchvision.transforms import transforms
@@ -18,6 +21,104 @@ def convert_to_grayscale(source_folder, target_folder):
             img = cv2.imread(img_path)
             gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             cv2.imwrite(os.path.join(target_folder, img_name), gray_img)
+
+
+
+
+
+def copy_large_images(input_folder, output_folder, min_size=256):
+    """
+    Copies all images with dimensions greater than 256x256 pixels from the input folder to the output folder.
+    
+    Parameters:
+    input_folder (str): Path to the input folder containing images.
+    output_folder (str): Path to the output folder to save the large images.
+    min_size (int): Minimum size (in pixels) for both width and height. Default is 256.
+    """
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # Loop over all files in the input folder
+    for filename in os.listdir(input_folder):
+        input_path = os.path.join(input_folder, filename)
+        
+        # Check if the file is an image (basic check by extension)
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+            # Read the image
+            image = cv2.imread(input_path)
+            
+            # Get the image dimensions
+            height, width = image.shape[:2]
+            
+            # Check if both dimensions are greater than the specified minimum size
+            if height >= min_size and width >= min_size:
+                output_path = os.path.join(output_folder, filename)
+                shutil.copy(input_path, output_path)
+                print(f"Copied: {output_path}")
+
+
+
+
+def pad_image_to_256(image):
+    """
+    Pads the image to ensure both dimensions are at least 256 pixels.
+    Padding is applied symmetrically, and the padded area is filled with black (0).
+    
+    Parameters:
+    image (numpy.ndarray): The input image.
+    
+    Returns:
+    numpy.ndarray: The padded image with dimensions of at least 256x256 pixels.
+    """
+    original_height, original_width = image.shape[:2]
+    
+    pad_height = max(0, 256 - original_height)
+    pad_width = max(0, 256 - original_width)
+    
+    top = pad_height // 2
+    bottom = pad_height - top
+    left = pad_width // 2
+    right = pad_width - left
+    
+    padded_image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    
+    return padded_image
+
+def process_images_in_folder(input_folder, output_folder):
+    """
+    Pads all images in the input folder to at least 256x256 pixels and saves them to the output folder.
+    
+    Parameters:
+    input_folder (str): Path to the input folder containing images.
+    output_folder (str): Path to the output folder to save padded images.
+    """
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # Loop over all files in the input folder
+    for filename in os.listdir(input_folder):
+        # Full path to the input file
+        input_path = os.path.join(input_folder, filename)
+        
+        # Check if the file is an image (basic check by extension)
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+            # Read the image
+            image = cv2.imread(input_path)
+            
+            # Pad the image if necessary
+            padded_image = pad_image_to_256(image)
+            
+            # Full path to the output file
+            output_path = os.path.join(output_folder, filename)
+            
+            # Save the padded image
+            cv2.imwrite(output_path, padded_image)
+            print(f"Processed and saved: {output_path}")
+
+
+
 
 
 def calculate_mean_std(directory):
@@ -135,4 +236,13 @@ class LambdaLR:
 
 
 if __name__ == "__main__":
-    convert_to_grayscale('/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20', '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20')
+    input_folder  = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20'
+    output_folder = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set21'
+    # copy_large_images(input_folder, output_folder)
+
+    # process_images_in_folder(input_folder, output_folder)
+
+    convert_to_grayscale(input_folder, output_folder)
+
+
+    

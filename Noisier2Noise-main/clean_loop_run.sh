@@ -1,14 +1,17 @@
 #!/usr/local/bin/bash
 
 # Hardcoded files to delete
-file_to_delete1="SSIM_0.csv"
-file_to_delete2="SSIM_1.csv"
-file_to_delete3="SSIM_2.csv"
-file_to_delete4="SSIM_all_images_average.csv"
-file_to_delete5="PSNR_0.csv"
-file_to_delete6="PSNR_1.csv"
-file_to_delete7="PSNR_2.csv"
-file_to_delete8="PSNR_all_images_average.csv"
+file_to_delete1="./csvs/SSIM_0.csv"
+file_to_delete2="./csvs/SSIM_1.csv"
+file_to_delete3="./csvs/SSIM_2.csv"
+file_to_delete4="./csvs/SSIM_all_images_average.csv"
+file_to_delete5="./csvs/PSNR_0.csv"
+file_to_delete6="./csvs/PSNR_1.csv"
+file_to_delete7="./csvs/PSNR_2.csv"
+file_to_delete8="./csvs/PSNR_all_images_average.csv"
+
+# Set the folder path you want to clean
+folder_path="./csvs"
 
 # Parse command line arguments
 range_start=1
@@ -44,16 +47,17 @@ done
 
 # Execute clean operation if flag is set
 if $clean_flag; then
-    for file_to_delete in "$file_to_delete1" "$file_to_delete2" "$file_to_delete3" "$file_to_delete4" "$file_to_delete5" "$file_to_delete6" "$file_to_delete7" "$file_to_delete8"
-    do
-        if [ -f "$file_to_delete" ]; then
-            rm "$file_to_delete"
-            echo "Deleted file: $file_to_delete"
-        else
-            echo "File not found: $file_to_delete"
-        fi
-    done
+
+    # Check if the folder exists
+    if [ -d "$folder_path" ]; then
+        # Delete everything inside the folder
+        rm -rf "$folder_path"/*
+        echo "Deleted all files and folders inside: $folder_path"
+    else
+        echo "Folder not found: $folder_path"
+    fi
 fi
+
 
 python3 utils.py
 
@@ -64,7 +68,7 @@ else
     # Run the loop
     for i in $(seq $range_start $range_end)
     do
-        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20 --aver_num $i
+        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set22 --aver_num $i
     done
 fi
 
@@ -82,3 +86,5 @@ fi
 # ./clean_loop_run.sh --range 1  
 
 # ./clean_loop_run.sh --skip_run --clean
+
+# ./clean_loop_run.sh --range 30 --clean --graph 
