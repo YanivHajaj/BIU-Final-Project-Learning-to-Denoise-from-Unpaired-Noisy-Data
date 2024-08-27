@@ -10,6 +10,13 @@ from torchvision.transforms import transforms
 
 ################################# Path & Directory #################################
 def convert_to_grayscale(source_folder, target_folder):
+    """
+    Converts all images in the source folder to grayscale and saves them to the target folder.
+    
+    Parameters:
+    source_folder (str): Path to the folder containing original images.
+    target_folder (str): Path to the folder where grayscale images will be saved.
+    """
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
 
@@ -19,9 +26,6 @@ def convert_to_grayscale(source_folder, target_folder):
             img = cv2.imread(img_path)
             gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             cv2.imwrite(os.path.join(target_folder, img_name), gray_img)
-
-
-
 
 
 def copy_large_images(input_folder, output_folder, min_size=256):
@@ -56,8 +60,6 @@ def copy_large_images(input_folder, output_folder, min_size=256):
                 print(f"Copied: {output_path}")
 
 
-
-
 def pad_image_to_256(image):
     """
     Pads the image to ensure both dimensions are at least 256 pixels.
@@ -82,6 +84,7 @@ def pad_image_to_256(image):
     padded_image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=[0, 0, 0])
     
     return padded_image
+
 
 def process_images_in_folder(input_folder, output_folder):
     """
@@ -116,10 +119,16 @@ def process_images_in_folder(input_folder, output_folder):
             print(f"Processed and saved: {output_path}")
 
 
-
-
-
 def calculate_mean_std(directory):
+    """
+    Calculates the mean and standard deviation of pixel values in grayscale images from a directory.
+    
+    Parameters:
+    directory (str): Path to the directory containing images.
+    
+    Returns:
+    tuple: A tuple containing the mean and standard deviation of pixel values.
+    """
     pixel_sum = 0
     pixel_sum_squared = 0
     num_pixels = 0
@@ -137,12 +146,31 @@ def calculate_mean_std(directory):
     std = np.sqrt((pixel_sum_squared / num_pixels) - (mean ** 2))
     return mean, std
 
+
 def is_image_file(filename):
+    """
+    Checks if a file is an image based on its extension.
+    
+    Parameters:
+    filename (str): Name of the file to check.
+    
+    Returns:
+    bool: True if the file is an image, False otherwise.
+    """
     extensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png', '.PNG', '.tif', '.TIF']
     return any(filename.endswith(extension) for extension in extensions)
 
 
 def make_dataset(dir):
+    """
+    Creates a list of image file paths from a directory and its subdirectories.
+    
+    Parameters:
+    dir (str): Path to the directory containing images.
+    
+    Returns:
+    list: A list of file paths to images.
+    """
     img_paths = []
     assert os.path.isdir(dir), '{} is not a valid directory'.format(dir)
 
@@ -154,6 +182,15 @@ def make_dataset(dir):
 
 
 def make_exp_dir(main_dir):
+    """
+    Creates a new experiment directory with an incremental number.
+    
+    Parameters:
+    main_dir (str): Path to the main directory where experiment folders will be created.
+    
+    Returns:
+    dict: A dictionary containing the new directory path and its incremental number.
+    """
     if not os.path.exists(main_dir):
         os.makedirs(main_dir)
 
@@ -173,6 +210,15 @@ def make_exp_dir(main_dir):
 
 ################################# Transforms #################################
 def get_transforms(args):
+    """
+    Returns a list of torchvision transforms based on the provided arguments.
+    
+    Parameters:
+    args (Namespace): Argument namespace containing crop, patch_size, mean, and std.
+    
+    Returns:
+    list: A list of torchvision transforms.
+    """
     transform_list = [transforms.ToTensor()]
     if args.crop:
         transform_list.append(transforms.CenterCrop(size=args.patch_size))
@@ -182,6 +228,16 @@ def get_transforms(args):
 
 
 def crop(img, patch_size):
+    """
+    Crops the center of an image to the specified patch size.
+    
+    Parameters:
+    img (numpy.ndarray): The input image.
+    patch_size (int): The size of the patch to crop.
+    
+    Returns:
+    numpy.ndarray: The cropped image patch.
+    """
     if img.ndim == 2:
         h, w = img.shape
         return img[h//2-patch_size//2:h//2+patch_size//2, w//2-patch_size//2:w//2+patch_size//2]
@@ -194,10 +250,31 @@ def crop(img, patch_size):
 
 ################################# ETC #################################
 def denorm(tensor, mean=0.5, std=0.5, max_pixel=1.):
+    """
+    Denormalizes a tensor by multiplying by standard deviation and adding the mean.
+    
+    Parameters:
+    tensor (torch.Tensor): The input tensor.
+    mean (float): The mean value used for normalization.
+    std (float): The standard deviation used for normalization.
+    max_pixel (float): The maximum pixel value (default is 1).
+    
+    Returns:
+    torch.Tensor: The denormalized tensor.
+    """
     return std*max_pixel*tensor + mean*max_pixel
 
 
 def tensor_to_numpy(x):
+    """
+    Converts a PyTorch tensor to a NumPy array.
+    
+    Parameters:
+    x (torch.Tensor): The input tensor.
+    
+    Returns:
+    numpy.ndarray: The converted NumPy array.
+    """
     x = x.detach().cpu().numpy()
     if x.ndim == 4:
         return x.transpose((0, 2, 3, 1))
@@ -210,6 +287,13 @@ def tensor_to_numpy(x):
 
 
 def plot_tensors(tensor_list, title_list):
+    """
+    Plots a list of tensors as images with corresponding titles.
+    
+    Parameters:
+    tensor_list (list): List of PyTorch tensors to plot.
+    title_list (list): List of titles for each tensor.
+    """
     numpy_list = [tensor_to_numpy(t) for t in tensor_list]
     fig = plt.figure(figsize=(4*len(numpy_list), 8))
     rows, cols = 1, len(numpy_list)
@@ -223,6 +307,14 @@ def plot_tensors(tensor_list, title_list):
 
 
 class LambdaLR:
+    """
+    Defines a learning rate schedule with linear decay starting at a specified epoch.
+    
+    Parameters:
+    n_epochs (int): Total number of epochs.
+    offset (int): Number of epochs to offset the start of the decay.
+    decay_start_epoch (int): Epoch at which to start the decay.
+    """
     def __init__(self, n_epochs, offset, decay_start_epoch):
         assert ((n_epochs - decay_start_epoch) > 0), "Decay must start before the training session ends!"
         self.n_epochs = n_epochs
@@ -230,6 +322,15 @@ class LambdaLR:
         self.decay_start_epoch = decay_start_epoch
 
     def step(self, epoch):
+        """
+        Calculates the learning rate multiplier based on the current epoch.
+        
+        Parameters:
+        epoch (int): The current epoch.
+        
+        Returns:
+        float: The learning rate multiplier.
+        """
         return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch)/(self.n_epochs - self.decay_start_epoch)
 
 
@@ -240,7 +341,4 @@ if __name__ == "__main__":
 
     # process_images_in_folder(input_folder, output_folder)
 
-    convert_to_grayscale(input_folder, output_folder)
-
-
-    
+    # convert_to_grayscale(input_folder, output_folder)

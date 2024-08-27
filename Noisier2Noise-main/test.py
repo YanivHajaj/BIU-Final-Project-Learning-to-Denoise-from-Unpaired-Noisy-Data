@@ -107,7 +107,6 @@ def generate(args):
             else:
                 raise NotImplementedError('wrong type of noise')
             
-
             noisier_tensor      = transform(noisier_numpy)
             noisier_tensor      = torch.unsqueeze(noisier_tensor, dim=0)
             noisier[i, :, :, :] = noisier_tensor
