@@ -1,15 +1,5 @@
 #!/usr/local/bin/bash
 
-# Hardcoded files to delete
-file_to_delete1="./csvs/SSIM_0.csv"
-file_to_delete2="./csvs/SSIM_1.csv"
-file_to_delete3="./csvs/SSIM_2.csv"
-file_to_delete4="./csvs/SSIM_all_images_average.csv"
-file_to_delete5="./csvs/PSNR_0.csv"
-file_to_delete6="./csvs/PSNR_1.csv"
-file_to_delete7="./csvs/PSNR_2.csv"
-file_to_delete8="./csvs/PSNR_all_images_average.csv"
-
 # Set the folder path you want to clean
 folder_path="./csvs"
 
@@ -85,6 +75,6 @@ fi
 
 # ./clean_loop_run.sh --range 1  
 
-# ./clean_loop_run.sh --skip_run --clean
+# ./clean_loop_run.sh --skip_run --graph
 
 # ./clean_loop_run.sh --range 30 --clean --graph 
