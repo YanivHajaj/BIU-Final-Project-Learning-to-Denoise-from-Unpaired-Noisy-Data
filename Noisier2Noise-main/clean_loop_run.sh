@@ -49,7 +49,7 @@ if $clean_flag; then
 fi
 
 
-python3 utils.py
+# python3 utils.py
 
 # Skip the loop if skip_run_flag is set
 if $skip_run_flag; then
@@ -58,7 +58,7 @@ else
     # Run the loop
     for i in $(seq $range_start $range_end)
     do
-        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set22 --aver_num $i
+        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20 --aver_num $i
     done
 fi
 
@@ -73,7 +73,7 @@ fi
 
 # ./clean_loop_run.sh --graph --skip_run
 
-# ./clean_loop_run.sh --range 1  
+# ./clean_loop_run.sh --range 1  --clean
 
 # ./clean_loop_run.sh --skip_run --graph
 

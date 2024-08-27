@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 import os
-import cv2
 import shutil
 
-import torch
 from torchvision.transforms import transforms
 
 
