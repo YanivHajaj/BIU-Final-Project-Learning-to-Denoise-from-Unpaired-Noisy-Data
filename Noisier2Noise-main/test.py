@@ -25,6 +25,7 @@ parser.add_argument('--noise', default='gauss_25', type=str)  # 'gauss_intensity
 parser.add_argument('--dataset', default='Set12', type=str)  # BSD100, Kodak, Set12
 parser.add_argument('--aver_num', default=10, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
+parser.add_argument('--trim_op', default=0.1, type=float)
 
 # Transformations
 parser.add_argument('--crop', type=bool, default=True)
@@ -70,7 +71,7 @@ def generate(args):
     psnr_averages, ssim_averages = {}, {}
 
     # CSV
-    csv_header = ['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median']
+    csv_header = ['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median', 'overlap_trimmed_mean']
     csv_folder = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'csvs'))
 
 
@@ -113,23 +114,32 @@ def generate(args):
         noisier = noisier.type(torch.FloatTensor).to(device)
 
         # Calculate overlap using mean and median
-        overlap_mean      = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
-        overlap_mean      = torch.mean(overlap_mean, dim=0)
-        overlap_median    = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
-        overlap_median, _ = torch.median(overlap_median, dim=0)
+        overlap_prediction = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
+
+        overlap_mean      = torch.mean(overlap_prediction, dim=0)
+        overlap_median, _ = torch.median(overlap_prediction, dim=0)
+
+        # Trimmed mean per pixel calculation - TODO: check if the sort is by pixel (not by image)
+        sorted_overlap, _ = torch.sort(overlap_prediction, dim=0)
+        trim_percent = args.trim_op  # 10% trimming by default
+        num_to_trim = int(trim_percent * sorted_overlap.size(0))
+        trimmed_overlap = sorted_overlap[num_to_trim:-num_to_trim, :, :, :]  # Trimming across the batch dimension
+        overlap_trimmed_mean = torch.mean(trimmed_overlap, dim=0)  # Mean across the batch dimension after trimming
+
 
         # Change to Numpy
         if args.normalize:
             prediction      = denorm(prediction, mean=args.mean, std=args.std)
             overlap_mean    = denorm(overlap_mean, mean=args.mean, std=args.std)
             overlap_median  = denorm(overlap_median, mean=args.mean, std=args.std)
+            overlap_trimmed = denorm(overlap_trimmed_mean, mean=args.mean, std=args.std)
             noisier         = denorm(noisier_numpy_single, mean=args.mean, std=args.std)  # Add denormalization for noisier (the single noisier of the predict, not overlap)
 
-        prediction, overlap_mean, overlap_median                    = tensor_to_numpy(prediction), tensor_to_numpy(overlap_mean), tensor_to_numpy(overlap_median)
-        prediction_numpy, overlap_mean_numpy, overlap_median_numpy  = np.squeeze(prediction), np.squeeze(overlap_mean), np.squeeze(overlap_median)
-        noisier_numpy                                               = np.squeeze(noisier)  # Convert noisier tensor to numpy and squeeze
+        prediction, overlap_mean, overlap_median, overlap_trimmed                          = tensor_to_numpy(prediction), tensor_to_numpy(overlap_mean), tensor_to_numpy(overlap_median), tensor_to_numpy(overlap_trimmed)
+        prediction_numpy, overlap_mean_numpy, overlap_median_numpy, overlap_trimmed_numpy  = np.squeeze(prediction), np.squeeze(overlap_mean), np.squeeze(overlap_median), np.squeeze(overlap_trimmed)
+        noisier_numpy                                                                      = np.squeeze(noisier)  # Convert noisier tensor to numpy and squeeze
 
-        image_metrics = calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy)
+        image_metrics = calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy, overlap_trimmed_numpy)
 
         for metric_type in ['psnr', 'ssim']:
             averages = psnr_averages if metric_type == 'psnr' else ssim_averages
@@ -140,22 +150,22 @@ def generate(args):
                     averages[key] = value / len(imgs)
 
         # Log PSNR and SSIM values
-        print('{}th image | PSNR: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, noisier:{:.3f} | SSIM: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, noisier:{:.3f}'.format(
+        print('{}th image | PSNR: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, overlap_trimmed_mean:{:.3f}, noisier:{:.3f} | SSIM: noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, overlap_trimmed_mean:{:.3f}, noisier:{:.3f}'.format(
                 index + 1, image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], image_metrics['psnr']['overlap_mean'], 
-                image_metrics['psnr']['overlap_median'], image_metrics['psnr']['noisier'], image_metrics['ssim']['noisy'],
+                image_metrics['psnr']['overlap_median'], image_metrics['psnr']['overlap_trim'], image_metrics['psnr']['noisier'], image_metrics['ssim']['noisy'],
                 image_metrics['ssim']['prediction'], image_metrics['ssim']['overlap_mean'],
-                image_metrics['ssim']['overlap_median'], image_metrics['ssim']['noisier']))
+                image_metrics['ssim']['overlap_median'], image_metrics['ssim']['overlap_trim'], image_metrics['ssim']['noisier']))
              
         # write on SCV per image SSIM and PSNR
         file_path = f'{csv_folder}PSNR_{index}.csv'  
         csv_data = [args.aver_num ,image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], 
-                    image_metrics['psnr']['overlap_mean'], image_metrics['psnr']['overlap_median']]
+                    image_metrics['psnr']['overlap_mean'], image_metrics['psnr']['overlap_median'], image_metrics['psnr']['overlap_trim']]
         
         write_csv(file_path, csv_data, csv_header)
 
         file_path = f'{csv_folder}SSIM_{index}.csv'  
         csv_data = [args.aver_num, image_metrics['ssim']['noisy'], image_metrics['ssim']['prediction'], 
-                    image_metrics['ssim']['overlap_mean'], image_metrics['ssim']['overlap_median']]
+                    image_metrics['ssim']['overlap_mean'], image_metrics['ssim']['overlap_median'], image_metrics['ssim']['overlap_trim']]
         
         write_csv(file_path, csv_data, csv_header)
 
@@ -166,6 +176,7 @@ def generate(args):
             sample_prediction           = 255. * np.clip(prediction_numpy, 0., 1.)
             sample_overlap_mean         = 255. * np.clip(overlap_mean_numpy, 0., 1.)
             sample_overlap_median       = 255. * np.clip(overlap_median_numpy, 0., 1.)
+            sample_overlap_trimmed      = 255. * np.clip(overlap_trimmed_numpy, 0., 1.)
             sample_noisier              = 255. * np.clip(noisier_numpy, 0., 1.)  # Prepare noisier image for saving
 
             cv2.imwrite(os.path.join(save_dir, '{}th_clean.png'.format(index+1)), sample_clean)
@@ -173,22 +184,23 @@ def generate(args):
             cv2.imwrite(os.path.join(save_dir, '{}th_prediction.png'.format(index+1)), sample_prediction)
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_mean.png'.format(index+1)), sample_overlap_mean)
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_median.png'.format(index+1)), sample_overlap_median)
+            cv2.imwrite(os.path.join(save_dir, '{}th_overlap_trimmed.png'.format(index+1)), sample_overlap_trimmed)
             cv2.imwrite(os.path.join(save_dir, '{}th_noisier.png'.format(index + 1)),sample_noisier)  # Save noisier image
 
     # Total PSNR, SSIM
-    print('{} Average PSNR | noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
-        args.dataset, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median'], psnr_averages['noisier']))
-    print('{} Average SSIM | noisy:{:.3f},  prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}'.format(
-        args.dataset, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median'], ssim_averages['noisier']))
+    print('{} Average PSNR | noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, overlap_trimmed_mean:{:.3f}'.format(
+        args.dataset, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median'], psnr_averages['noisier'], psnr_averages['overlap_trim']))
+    print('{} Average SSIM | noisy:{:.3f},  prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, overlap_trimmed_mean:{:.3f}'.format(
+        args.dataset, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median'], ssim_averages['noisier'], ssim_averages['overlap_trim']))
   
-    # write average SSIM per k 
-    file_path = f'{csv_folder}SSIM_all_images_average.csv'  
-    csv_data  = [args.aver_num, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median']]
-    write_csv(file_path, csv_data, csv_header)
-
     # write average PSNR per k
     file_path = f'{csv_folder}PSNR_all_images_average.csv'  
-    csv_data  = [args.aver_num, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median']]
+    csv_data  = [args.aver_num, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median'], psnr_averages['overlap_trim']]
+    write_csv(file_path, csv_data, csv_header)
+
+    # write average SSIM per k 
+    file_path = f'{csv_folder}SSIM_all_images_average.csv'  
+    csv_data  = [args.aver_num, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median'], ssim_averages['overlap_trim']]
     write_csv(file_path, csv_data, csv_header)
 
 
@@ -234,7 +246,7 @@ def write_csv(file_path, data, header):
         writer.writerow(data)
 
 
-def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy):
+def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy, overlap_trimmed_numpy):
     """
     Calculates PSNR and SSIM metrics for various stages of image processing.
 
@@ -255,6 +267,7 @@ def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_n
             'prediction'    : psnr(clean_numpy, prediction_numpy, data_range=1),
             'overlap_mean'  : psnr(clean_numpy, overlap_mean_numpy, data_range=1),
             'overlap_median': psnr(clean_numpy, overlap_median_numpy, data_range=1),
+            'overlap_trim'  : psnr(clean_numpy, overlap_trimmed_numpy, data_range=1),
             'noisier'       : psnr(clean_numpy, noisier_numpy, data_range=1)
         },
         'ssim': {
@@ -262,6 +275,7 @@ def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_n
             'prediction'    : ssim(clean_numpy, prediction_numpy, data_range=1),
             'overlap_mean'  : ssim(clean_numpy, overlap_mean_numpy, data_range=1),
             'overlap_median': ssim(clean_numpy, overlap_median_numpy, data_range=1),
+            'overlap_trim'  : ssim(clean_numpy, overlap_trimmed_numpy, data_range=1),
             'noisier'       : ssim(clean_numpy, noisier_numpy, data_range=1)
         }
     }
