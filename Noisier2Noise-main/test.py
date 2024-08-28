@@ -52,9 +52,7 @@ def generate(args):
 
     # Directory
     img_dir  = os.path.join('../all_datasets/', args.dataset)
-    save_dir = os.path.join('./results/', args.dataset)
-    if not os.path.exists(save_dir):
-        os.mkdir(save_dir)
+    save_dir = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'imgs'))
 
     # Images
     # Load all PNG and JPG images from the dataset directory - transform to grayscale
@@ -73,7 +71,7 @@ def generate(args):
 
     # CSV
     csv_header = ['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median']
-    csv_folder = create_next_experiment_folder()
+    csv_folder = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'csvs'))
 
 
     for index, clean255 in enumerate(imgs):
@@ -193,19 +191,40 @@ def generate(args):
     csv_data  = [args.aver_num, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median']]
     write_csv(file_path, csv_data, csv_header)
 
-def create_next_experiment_folder(base_folder='./csvs/'):
+
+
+    ###### UTILS FUNCTIONS #######
+def create_next_experiment_folder(base_folder):
+    """
+    Creates the next available experiment folder in a base folder.
+    The folder is named with an incremental number (e.g., exp1, exp2, etc.).
+
+    Parameters:
+    base_folder (str): The base directory where experiment folders are created.
+
+    Returns:
+    str: The path to the newly created experiment folder.
+    """
     # Find the next available folder number
     exp_num = 1
-    while os.path.exists(f'{base_folder}exp{exp_num}'):
+    while os.path.exists(f'{base_folder}/exp{exp_num}'):
         exp_num += 1
     
     # Create the new folder
-    new_folder = f'{base_folder}exp{exp_num}/'
+    new_folder = f'{base_folder}/exp{exp_num}/'
     os.makedirs(new_folder)
     
     return new_folder
 
 def write_csv(file_path, data, header):
+    """
+    Appends data to a CSV file, creating the file with a header if it doesn't exist.
+
+    Parameters:
+    file_path (str): Path to the CSV file.
+    data (list): A list of data to write as a new row.
+    header (list): A list representing the header of the CSV file.
+    """
     file_exists = os.path.isfile(file_path)
     
     with open(file_path, mode='a', newline='') as file:
@@ -216,6 +235,20 @@ def write_csv(file_path, data, header):
 
 
 def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy):
+    """
+    Calculates PSNR and SSIM metrics for various stages of image processing.
+
+    Parameters:
+    clean_numpy (numpy.ndarray): The clean image array.
+    noisy_numpy (numpy.ndarray): The noisy image array.
+    prediction_numpy (numpy.ndarray): The predicted image array.
+    overlap_mean_numpy (numpy.ndarray): The image after mean overlap.
+    overlap_median_numpy (numpy.ndarray): The image after median overlap.
+    noisier_numpy (numpy.ndarray): The noisier version of the image array.
+
+    Returns:
+    dict: A dictionary containing PSNR and SSIM metrics for each image stage.
+    """
     metrics = {
         'psnr': {
             'noisy'         : psnr(clean_numpy, noisy_numpy, data_range=1),

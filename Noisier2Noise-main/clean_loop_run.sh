@@ -78,3 +78,5 @@ fi
 # ./clean_loop_run.sh --skip_run --graph
 
 # ./clean_loop_run.sh --range 30 --clean --graph 
+
+# python3 graph.py --set Set20 --exp 1
