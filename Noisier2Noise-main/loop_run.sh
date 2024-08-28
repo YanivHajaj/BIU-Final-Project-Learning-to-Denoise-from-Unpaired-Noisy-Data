@@ -1,3 +1,5 @@
+# automation that tests:
+# 1. different values of alpha (0.2, 0.5)
 
 for i in {1..5}
 do

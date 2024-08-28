@@ -157,13 +157,16 @@ def generate(args):
                 image_metrics['ssim']['overlap_median'], image_metrics['ssim']['overlap_trim'], image_metrics['ssim']['noisier']))
              
         # write on SCV per image SSIM and PSNR
-        file_path = f'{csv_folder}PSNR_{index}.csv'  
+        # Assuming img_paths[index] is the image file path with an extension
+        file_name = os.path.splitext(os.path.basename(img_paths[index]))[0]  # Extracts the base file name without extension
+
+        file_path = f'{csv_folder}PSNR_{index}_{file_name}.csv'  
         csv_data = [args.aver_num ,image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], 
                     image_metrics['psnr']['overlap_mean'], image_metrics['psnr']['overlap_median'], image_metrics['psnr']['overlap_trim']]
         
         write_csv(file_path, csv_data, csv_header)
 
-        file_path = f'{csv_folder}SSIM_{index}.csv'  
+        file_path = f'{csv_folder}SSIM_{index}_{file_name}.csv'  
         csv_data = [args.aver_num, image_metrics['ssim']['noisy'], image_metrics['ssim']['prediction'], 
                     image_metrics['ssim']['overlap_mean'], image_metrics['ssim']['overlap_median'], image_metrics['ssim']['overlap_trim']]
         
@@ -217,6 +220,10 @@ def create_next_experiment_folder(base_folder):
     Returns:
     str: The path to the newly created experiment folder.
     """
+    # Ensure the base folder exists
+    if not os.path.exists(base_folder):
+        os.makedirs(base_folder)
+
     # Find the next available folder number
     exp_num = 1
     while os.path.exists(f'{base_folder}/exp{exp_num}'):
@@ -227,6 +234,7 @@ def create_next_experiment_folder(base_folder):
     os.makedirs(new_folder)
     
     return new_folder
+
 
 def write_csv(file_path, data, header):
     """
