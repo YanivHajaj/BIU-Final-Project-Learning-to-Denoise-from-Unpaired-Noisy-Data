@@ -4,7 +4,7 @@
 folder_path="./csvs"
 
 # Parse command line arguments
-range_start=1
+range_start=30
 range_end=20
 clean_flag=false
 graph_flag=false

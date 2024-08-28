@@ -23,7 +23,7 @@ parser.add_argument('--n_epochs', default=180, type=int)
 # Test parameters
 parser.add_argument('--noise', default='gauss_25', type=str)  # 'gauss_intensity', 'poisson_intensity'
 parser.add_argument('--dataset', default='Set12', type=str)  # BSD100, Kodak, Set12
-parser.add_argument('--aver_num', default=20, type=int)
+parser.add_argument('--aver_num', default=10, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
 
 # Transformations
@@ -73,6 +73,7 @@ def generate(args):
 
     # CSV
     csv_header = ['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median']
+    csv_folder = create_next_experiment_folder()
 
 
     for index, clean255 in enumerate(imgs):
@@ -148,21 +149,21 @@ def generate(args):
                 image_metrics['ssim']['overlap_median'], image_metrics['ssim']['noisier']))
              
         # write on SCV per image SSIM and PSNR
-        file_path = f'./csvs/PSNR_{index}.csv'  
+        file_path = f'{csv_folder}PSNR_{index}.csv'  
         csv_data = [args.aver_num ,image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], 
                     image_metrics['psnr']['overlap_mean'], image_metrics['psnr']['overlap_median']]
         
         write_csv(file_path, csv_data, csv_header)
 
-        file_path = f'./csvs/SSIM_{index}.csv'  
+        file_path = f'{csv_folder}SSIM_{index}.csv'  
         csv_data = [args.aver_num, image_metrics['ssim']['noisy'], image_metrics['ssim']['prediction'], 
                     image_metrics['ssim']['overlap_mean'], image_metrics['ssim']['overlap_median']]
         
         write_csv(file_path, csv_data, csv_header)
 
 
-        # Save sample images
-        if index <= 3:
+        # Save sample images (up to 5 images)
+        if index <= 5:
             sample_clean, sample_noisy  = 255. * np.clip(clean_numpy, 0., 1.), 255. * np.clip(noisy_numpy, 0., 1.)
             sample_prediction           = 255. * np.clip(prediction_numpy, 0., 1.)
             sample_overlap_mean         = 255. * np.clip(overlap_mean_numpy, 0., 1.)
@@ -183,16 +184,26 @@ def generate(args):
         args.dataset, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median'], ssim_averages['noisier']))
   
     # write average SSIM per k 
-    file_path = f'./csvs/SSIM_all_images_average.csv'  
+    file_path = f'{csv_folder}SSIM_all_images_average.csv'  
     csv_data  = [args.aver_num, ssim_averages['noisy'], ssim_averages['prediction'], ssim_averages['overlap_mean'], ssim_averages['overlap_median']]
     write_csv(file_path, csv_data, csv_header)
 
     # write average PSNR per k
-    file_path = f'./csvs/PSNR_all_images_average.csv'  
+    file_path = f'{csv_folder}PSNR_all_images_average.csv'  
     csv_data  = [args.aver_num, psnr_averages['noisy'], psnr_averages['prediction'], psnr_averages['overlap_mean'], psnr_averages['overlap_median']]
     write_csv(file_path, csv_data, csv_header)
 
-
+def create_next_experiment_folder(base_folder='./csvs/'):
+    # Find the next available folder number
+    exp_num = 1
+    while os.path.exists(f'{base_folder}exp{exp_num}'):
+        exp_num += 1
+    
+    # Create the new folder
+    new_folder = f'{base_folder}exp{exp_num}/'
+    os.makedirs(new_folder)
+    
+    return new_folder
 
 def write_csv(file_path, data, header):
     file_exists = os.path.isfile(file_path)
