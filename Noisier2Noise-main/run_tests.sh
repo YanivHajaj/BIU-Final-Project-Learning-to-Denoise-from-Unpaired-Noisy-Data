@@ -26,3 +26,6 @@ done
 
 
 # ./run_tests.sh
+
+
+python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --test_info "testing noisy gauss_25 input" --dataset Set25 --noisy_input True 

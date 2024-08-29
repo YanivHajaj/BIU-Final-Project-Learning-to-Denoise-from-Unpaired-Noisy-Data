@@ -34,6 +34,7 @@ parser.add_argument('--exp_rep', default=None, type=str)
 parser.add_argument('--aver_num', default=10, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
 parser.add_argument('--trim_op', default=0.05, type=float)
+parser.add_argument('--noisy_input', type=bool, default=False)
 
 # Transformations
 parser.add_argument('--crop', type=bool, default=True)
@@ -92,10 +93,17 @@ def generate(args):
 
         clean_numpy = clean255/255.
         if noise_type == 'gauss':
-            noisy_numpy          = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
+            if not opt.noisy_input:
+                noisy_numpy      = clean_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity
+            else:
+                noisy_numpy      = clean_numpy
+
             noisier_numpy_single = noisy_numpy + np.random.randn(*clean_numpy.shape) * noise_intensity * args.alpha
         elif noise_type == 'poisson':
-            noisy_numpy          = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
+            if not opt.noisy_input:
+                noisy_numpy          = np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255.
+            else:
+                noisy_numpy      = clean_numpy
             noisier_numpy_single = noisy_numpy + (np.random.poisson(clean_numpy * 255. * noise_intensity) / noise_intensity / 255. - clean_numpy)
         else:
             raise NotImplementedError('wrong type of noise')
@@ -180,13 +188,13 @@ def generate(args):
         file_name = os.path.splitext(os.path.basename(img_paths[index]))[0]  # Extracts the base file name without extension
 
         file_path = f'{csv_folder}PSNR_{index}_{file_name}.csv'  
-        csv_data = [args.aver_num ,image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], 
+        csv_data  = [args.aver_num ,image_metrics['psnr']['noisy'], image_metrics['psnr']['prediction'], 
                     image_metrics['psnr']['overlap_mean'], image_metrics['psnr']['overlap_median'], image_metrics['psnr']['overlap_trim']]
         
         write_csv(file_path, csv_data, csv_header)
 
         file_path = f'{csv_folder}SSIM_{index}_{file_name}.csv'  
-        csv_data = [args.aver_num, image_metrics['ssim']['noisy'], image_metrics['ssim']['prediction'], 
+        csv_data  = [args.aver_num, image_metrics['ssim']['noisy'], image_metrics['ssim']['prediction'], 
                     image_metrics['ssim']['overlap_mean'], image_metrics['ssim']['overlap_median'], image_metrics['ssim']['overlap_trim']]
         
         write_csv(file_path, csv_data, csv_header)

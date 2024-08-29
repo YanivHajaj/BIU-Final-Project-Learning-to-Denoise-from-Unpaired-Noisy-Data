@@ -6,7 +6,7 @@ Final project BIU - Computer Engineering
 # Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
 
-## Useful Information (Internal use for training)
+## Useful Information (Internal use for training):
 Article:
 'https://arxiv.org/pdf/1910.11908'
 
@@ -70,8 +70,6 @@ GitHub will display the token once. Copy it immediately and store it securely. Y
 ```
 
 
-
-
 ## Introduction
 
 **Noisier2Noise** is a novel approach for training neural networks to perform image denoising without requiring clean training examples or paired noisy examples. This method is particularly useful in situations where collecting clean images is difficult or impossible. The core idea behind Noisier2Noise is to add synthetic noise to an already noisy image and train the network to predict the original noisy image. By doing this, the model learns to differentiate between the noise present in the image and the additional synthetic noise, enabling it to better reconstruct the clean image.
@@ -106,24 +104,16 @@ The Noisier2Noise approach builds upon existing denoising techniques by introduc
      \]
      This step effectively reduces the noise in the prediction and brings the output closer to the true clean image.
 
-### 2. **Support for Non-Additive Noise Models:**
-   - The method has been extended to handle non-additive noise models, such as multiplicative Bernoulli noise. This is achieved by modifying the training process and the correction step accordingly.
-   - For example, in the case of Poisson noise, the method first adds Poisson noise to the image and then applies a Gaussian approximation to further refine the prediction.
-
-### 3. **Adaptation of Noise Intensity:**
+### 2. **Adaptation of Noise Intensity:**
    - The noise intensity for the added synthetic noise can be adjusted during training using the parameter `α`. Lower values of `α` provide a clearer view of the noisy image but require careful correction to avoid magnifying errors.
    - The method allows for quick fine-tuning of the model with different values of `α`, enabling rapid exploration of the best settings for a given dataset and noise model.
 
-### 4. **Optional Noise Model during Inference:**
+### 3. **Optional Noise Model during Inference:**
    - During inference (testing), the method offers the option to add noise of a different intensity than what was used during training. This feature can improve the model's performance by providing a clearer input, which is closer to the singly noisy image rather than the doubly noisy one.
    - The approach can be beneficial when the primary focus is on optimizing metrics like PSNR, where reduced noise during inference helps achieve better scores.
 
-### 5. **Structured Noise Handling:**
-   - The method is also designed to handle structured noise, where noise is not independently and identically distributed (i.i.d.) across pixels but has some spatial correlation.
-   - This enhancement makes the Noisier2Noise method applicable to a wider range of real-world scenarios where noise often exhibits spatial patterns.
-
-### 6. **Fine-tuning for Various Noise Models:**
-   - The Noisier2Noise method can be fine-tuned for different noise models, including Gaussian, Poisson, and Bernoulli noise. This flexibility allows the model to be adapted for specific applications, improving its robustness and effectiveness in diverse settings.
+### 4. **Fine-tuning for Various Noise Models:**
+   - The Noisier2Noise method can be fine-tuned for different noise models, including Gaussian, Poisson noise. This flexibility allows the model to be adapted for specific applications, improving its robustness and effectiveness in diverse settings.
 
 These improvements enable the Noisier2Noise method to perform well across a variety of noise conditions, making it a powerful tool for image denoising even in challenging scenarios where clean training data is unavailable.
 
@@ -134,11 +124,14 @@ To use the Noisier2Noise code, you'll need to have Python and the necessary libr
 
 ### Prerequisites
 
-- Python 3.7+
-- PyTorch
-- OpenCV
-- NumPy
-- Scikit-image
+- **Python 3.7+**: Ensure that you have Python version 3.7 or higher installed.
+- **PyTorch**: A deep learning framework that provides tensors and dynamic neural networks.
+- **OpenCV**: A library for computer vision tasks.
+- **NumPy**: A fundamental package for numerical computation in Python.
+- **Scikit-image**: A library for image processing.
+- **Matplotlib**: For plotting and visualizing data.
+- **Pandas**: For data manipulation and analysis.
+- **TQDM**: For creating progress bars in Python loops.
 
 ### Installation Steps
 
@@ -198,19 +191,19 @@ Create a Dataset Folder:
 Inside the all_datasets directory, create a new folder for your test dataset. For example, if you want to name your dataset Set19, the path would be ./all_datasets/Set19.
 Add Test Images:
 
-Place your test images inside the Set19 folder. Ensure that all images are in PNG format.
-These images should be clean (noise-free) if you want to evaluate the model's performance against a ground truth. Alternatively, you can use noisy images to simply observe the denoising capability of the model.
-Running the Test Script
-To test the model on the Set19 dataset, use the following command in your terminal or command prompt:
+Place your test images inside the Set19 folder. Ensure that all images are in PNG/JPG format.
+These images should be clean (noise-free) if you want to evaluate the model's performance against a ground truth (The model doesnt use the clean image).
+Alternatively, you can use noisy images to simply observe the denoising capability of the model, but in that case there is no way to get the PSNR/SSIM in comparation with the clean image.
+
+To test the model on the Set20 dataset using default values, use the following command in your terminal or command prompt:
 
 Run the command (for example)
    ```bash
-  python test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20
+  python test.py --exp_num 6 --n_epochs 200 --dataset Set20
    ```
 
 --exp_num: This should match the experiment number where your trained model is saved. For example, if your model is saved under exp2, set --exp_num to 2.
 --n_epochs: This should be the number of epochs at which your model was saved. If your checkpoint is saved at 500 epochs, set --n_epochs to 500.
---gpu_num: Set this to 0 to use the first GPU. If you are running the test on a CPU, you can ignore this parameter.
 --dataset: Set this to the name of the folder where your test images are stored (Set19).
 
 An example containing all the parameters:
@@ -232,7 +225,8 @@ python test.py \
     --patch_size 256 \
     --normalize True \
     --mean 0.4097 \
-    --std 0.2719
+    --std 0.2719 \
+    --noisy_input False
 ```
 
 ### Explanation of Key Arguments
@@ -275,13 +269,14 @@ python test.py \
 - **`--normalize`**: Boolean indicating whether to normalize the image data. Default is `True`.
 - **`--mean`**: Mean value used for normalization. Default is `0.4097`.
 - **`--std`**: Standard deviation used for normalization. Default is `0.2719`.
+- **`--noisy_input`**: Boolean indicating if the input images are already noisy. Default is `False`.
 
 
 ## Results and Evaluation
 
 The Noisier2Noise method has been tested on various datasets, including the Kodak image set, and compared against other denoising methods such as Noise2Noise and BM3D. The results demonstrate that Noisier2Noise can achieve competitive performance, particularly in scenarios where obtaining clean images is impractical.
 
-### How to Evaluate (run `test.py`)
+### How to Evaluate (after running `test.py`)
 
 #### Performance Metrics
 
@@ -331,7 +326,23 @@ The following images showcase the denoising capabilities of the Noisier2Noise mo
 - **Overlap Trimmed Mean Image**: The result of using a trimmed mean approach on multiple denoised outputs.
 
 #### Graphs
-The results also include graphs that provide a visual summary of the performance metrics:
+
+The `graph.py` script is designed to generate comparison graphs for different performance metrics like PSNR and SSIM across various experiments and datasets. It reads CSV files containing these metrics and plots them for visual analysis.
+
+##### Graph Usage
+
+To generate graphs for a specific experiment and dataset, run the following command:
+
+```bash
+python graph.py --exp 5 --set 20
+```
+On this example the script will run on `./Noisier2Noise-main/results/Set20/csvs/exp5` and generate on `./Noisier2Noise-main/results/Set20/graphs/exp5`
+
+The parameters are:
+- **`--exp`**: The experiment number to analyze. This corresponds to the experiment folder inside the results directory. Default is `1`.
+- **`--set`**: The dataset identifier used in the results directory. Default is `20`.
+
+##### Graph Results 
 
 - **PSNR Graph**: A graph showing the PSNR values for each image in the dataset.
 - **SSIM Graph**: A graph showing the SSIM values for each image in the dataset.
