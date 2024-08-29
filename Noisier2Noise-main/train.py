@@ -1,3 +1,7 @@
+# usage: test.py [-h] [--test_info TEST_INFO] [--gpu_num GPU_NUM] [--seed SEED] [--exp_num EXP_NUM] [--n_epochs N_EPOCHS] [--noise NOISE]
+#                [--dataset DATASET] [--exp_rep EXP_REP] [--aver_num AVER_NUM] [--alpha ALPHA] [--trim_op TRIM_OP] [--noisy_input NOISY_INPUT]
+#                [--crop CROP] [--patch_size PATCH_SIZE] [--normalize NORMALIZE] [--mean MEAN] [--std STD]
+
 import torch
 import torch.nn as nn
 import torch.optim as optim

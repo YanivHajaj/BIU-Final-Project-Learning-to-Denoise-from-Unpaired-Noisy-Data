@@ -351,12 +351,4 @@ The parameters are:
 
 - Moran, N., Schmidt, D., Zhong, Y., & Coady, P. (2019). Noisier2Noise: Learning to Denoise from Unpaired Noisy Data. *Algorithmic Systems Group, Analog Devices*.
 - Lehtinen, J., Munkberg, J., Hasselgren, J., Laine, S., Karras, T., Aittala, M., & Aila, T. (2018). Noise2Noise: Learning Image Restoration without Clean Data. arXiv preprint arXiv:1803.04189.
-
-## Contributing
-
-Contributions to the Noisier2Noise project are welcome. If you have any suggestions, bug reports, or feature requests, please create an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+- [GIT repo of code base](https://github.com/melobron/Noisier2Noise.git)
