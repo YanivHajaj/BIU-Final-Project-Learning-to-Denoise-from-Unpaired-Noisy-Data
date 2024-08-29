@@ -18,7 +18,7 @@ from utils import *
 # Arguments
 parser = argparse.ArgumentParser(description='Test Nr2N public')
 
-parser.add_argument('--test_info', default=None, type=str)
+parser.add_argument('--test_info', default='None info given', type=str)
 
 parser.add_argument('--gpu_num', default=0, type=int)
 parser.add_argument('--seed', default=90, type=int)
@@ -258,9 +258,10 @@ def create_next_experiment_folder(base_folder, exp_repeated = None):
     if opt.test_info:
         with open(new_folder + 'info.txt', 'w') as file:
             # Write test_info to the file
-            file.write(opt.test_info)
-
+            file.write(opt.test_info + "\n")
+            file.write(str(vars(opt)))
     
+
     return new_folder
 
 

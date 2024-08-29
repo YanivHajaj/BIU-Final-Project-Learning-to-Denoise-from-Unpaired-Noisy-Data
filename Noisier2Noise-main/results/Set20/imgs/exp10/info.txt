@@ -1,0 +1,2 @@
+testing with alpha 0.1 and noise gauss_25
+{'test_info': 'testing with alpha 0.1 and noise gauss_25', 'gpu_num': 0, 'seed': 90, 'exp_num': 6, 'n_epochs': 200, 'noise': 'gauss_25', 'dataset': 'Set20', 'exp_rep': None, 'aver_num': 10, 'alpha': 0.1, 'trim_op': 0.05, 'crop': True, 'patch_size': 256, 'normalize': True, 'mean': 0.4097, 'std': 0.2719}

@@ -4,8 +4,8 @@
 folder_path="./csvs"
 
 # Parse command line arguments
-range_start=30
-range_end=20
+range_start=21
+range_end=30
 clean_flag=false
 graph_flag=false
 skip_run_flag=false
@@ -80,4 +80,4 @@ fi
 
 # ./clean_loop_run.sh --range 30 --clean --graph 
 
-# python3 graph.py --set Set20 --exp 1
+# python3 graph.py --set Set20 --exp 5
