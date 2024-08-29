@@ -45,10 +45,10 @@ if __name__ == "__main__":
     # Example usage
     file_path = os.path.join('./results', dataset, f'csvs/exp{experiment_num}/SSIM_all_images_average.csv')
     x_column = 'k'  # replace with your x-axis column name
-    y_columns = ['overlap_mean', 'overlap_median']  # replace with your y-axis column names
+    y_columns = ['overlap_mean', 'overlap_median', 'overlap_trimmed_mean', 'prediction']  # replace with your y-axis column names
     plot_csv_graph(file_path, x_column, y_columns, 'SSIM', os.path.join(graph_path, 'average_SSIM.png'))
 
     file_path = os.path.join('./results', dataset, f'csvs/exp{experiment_num}/PSNR_all_images_average.csv')
-    x_column = 'k'  # replace with your x-axis column name
-    y_columns = ['overlap_mean', 'overlap_median']  # replace with your y-axis column names
+    # x_column = 'k'  # replace with your x-axis column name
+    # y_columns = ['overlap_mean', 'overlap_median']  # replace with your y-axis column names
     plot_csv_graph(file_path, x_column, y_columns, 'PSNR', os.path.join(graph_path, 'average_PSNR.png'))

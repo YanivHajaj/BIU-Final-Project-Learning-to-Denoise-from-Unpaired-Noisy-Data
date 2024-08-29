@@ -55,10 +55,11 @@ fi
 if $skip_run_flag; then
     echo "Skipping the loop execution as --skip_run flag is set."
 else
+
     # Run the loop
     for i in $(seq $range_start $range_end)
     do
-        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set22 --aver_num $i
+        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20 --exp_rep exp5 --test_info "testing trimmed" --aver_num $i
     done
 fi
 
@@ -73,7 +74,7 @@ fi
 
 # ./clean_loop_run.sh --graph --skip_run
 
-# ./clean_loop_run.sh --range 2 
+# ./clean_loop_run.sh --range  
 
 # ./clean_loop_run.sh --skip_run --graph
 

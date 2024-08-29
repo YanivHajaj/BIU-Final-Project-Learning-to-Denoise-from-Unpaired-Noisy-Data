@@ -1,5 +1,10 @@
+# usage: test.py [-h] [--test_info TEST_INFO] [--gpu_num GPU_NUM] [--seed SEED] [--exp_num EXP_NUM] [--n_epochs N_EPOCHS] [--noise NOISE] [--dataset DATASET]
+#                [--exp_rep EXP_REP] [--aver_num AVER_NUM] [--alpha ALPHA] [--trim_op TRIM_OP] [--crop CROP] [--patch_size PATCH_SIZE] [--normalize NORMALIZE]
+#                [--mean MEAN] [--std STD]
+
 import argparse
 import random
+import math
 from glob import glob
 import csv
 import os
@@ -13,6 +18,8 @@ from utils import *
 # Arguments
 parser = argparse.ArgumentParser(description='Test Nr2N public')
 
+parser.add_argument('--test_info', default=None, type=str)
+
 parser.add_argument('--gpu_num', default=0, type=int)
 parser.add_argument('--seed', default=90, type=int)
 parser.add_argument('--exp_num', default=10, type=int)
@@ -23,9 +30,10 @@ parser.add_argument('--n_epochs', default=180, type=int)
 # Test parameters
 parser.add_argument('--noise', default='gauss_25', type=str)  # 'gauss_intensity', 'poisson_intensity'
 parser.add_argument('--dataset', default='Set12', type=str)  # BSD100, Kodak, Set12
+parser.add_argument('--exp_rep', default=None, type=str)
 parser.add_argument('--aver_num', default=10, type=int)
 parser.add_argument('--alpha', default=1.0, type=float)
-parser.add_argument('--trim_op', default=0.1, type=float)
+parser.add_argument('--trim_op', default=0.05, type=float)
 
 # Transformations
 parser.add_argument('--crop', type=bool, default=True)
@@ -53,7 +61,7 @@ def generate(args):
 
     # Directory
     img_dir  = os.path.join('../all_datasets/', args.dataset)
-    save_dir = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'imgs'))
+    save_dir = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'imgs'), opt.exp_rep)
 
     # Images
     # Load all PNG and JPG images from the dataset directory - transform to grayscale
@@ -61,8 +69,11 @@ def generate(args):
     imgs      = [cv2.imread(p, cv2.IMREAD_GRAYSCALE) for p in img_paths]
 
     # Noise
-    noise_type      = args.noise.split('_')[0]
-    noise_intensity = float(args.noise.split('_')[1]) / 255.
+    noise_type = args.noise.split('_')[0]
+    noise_intensity = float(args.noise.split('_')[1]) / 255.0
+
+    # print(f'************ noise intensity from {noise_type} is: **************')
+    # print(noise_intensity)
 
     # Transform
     transform = transforms.Compose(get_transforms(args))
@@ -72,7 +83,7 @@ def generate(args):
 
     # CSV
     csv_header = ['k', 'noisy', 'prediction', 'overlap_mean', 'overlap_median', 'overlap_trimmed_mean']
-    csv_folder = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'csvs'))
+    csv_folder = create_next_experiment_folder(os.path.join('./results/', args.dataset, 'csvs'), opt.exp_rep)
 
 
     for index, clean255 in enumerate(imgs):
@@ -122,9 +133,17 @@ def generate(args):
         # Trimmed mean per pixel calculation - TODO: check if the sort is by pixel (not by image)
         sorted_overlap, _ = torch.sort(overlap_prediction, dim=0)
         trim_percent = args.trim_op  # 10% trimming by default
-        num_to_trim = int(trim_percent * sorted_overlap.size(0))
-        trimmed_overlap = sorted_overlap[num_to_trim:-num_to_trim, :, :, :]  # Trimming across the batch dimension
-        overlap_trimmed_mean = torch.mean(trimmed_overlap, dim=0)  # Mean across the batch dimension after trimming
+        num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))
+        
+        # Ensure that trimming does not empty the tensor
+        if num_to_trim == 0 or 2 * num_to_trim >= sorted_overlap.size(0):
+            print(f"Trimming would result in an empty tensor or no trimming possible. Skipping trimming for this image.")
+            overlap_trimmed_mean = torch.mean(sorted_overlap, dim=0)  # No trimming applied
+        else:
+            trimmed_overlap = sorted_overlap[num_to_trim:-num_to_trim, :, :, :]
+            overlap_trimmed_mean = torch.mean(trimmed_overlap, dim=0)  # Mean across the batch dimension after trimming
+            print(f"Trimmed tensor shape: {trimmed_overlap.size()}")
+            print(f"Calculated overlap_trimmed_mean: {overlap_trimmed_mean}")
 
 
         # Change to Numpy
@@ -173,8 +192,8 @@ def generate(args):
         write_csv(file_path, csv_data, csv_header)
 
 
-        # Save sample images (up to 5 images)
-        if index <= 5:
+        # Save sample images (up to 10 images)
+        if index <= 10:
             sample_clean, sample_noisy  = 255. * np.clip(clean_numpy, 0., 1.), 255. * np.clip(noisy_numpy, 0., 1.)
             sample_prediction           = 255. * np.clip(prediction_numpy, 0., 1.)
             sample_overlap_mean         = 255. * np.clip(overlap_mean_numpy, 0., 1.)
@@ -209,7 +228,7 @@ def generate(args):
 
 
     ###### UTILS FUNCTIONS #######
-def create_next_experiment_folder(base_folder):
+def create_next_experiment_folder(base_folder, exp_repeated = None):
     """
     Creates the next available experiment folder in a base folder.
     The folder is named with an incremental number (e.g., exp1, exp2, etc.).
@@ -220,6 +239,9 @@ def create_next_experiment_folder(base_folder):
     Returns:
     str: The path to the newly created experiment folder.
     """
+    if exp_repeated:
+        return os.path.join(base_folder, f'{exp_repeated}/')
+    
     # Ensure the base folder exists
     if not os.path.exists(base_folder):
         os.makedirs(base_folder)
@@ -232,6 +254,12 @@ def create_next_experiment_folder(base_folder):
     # Create the new folder
     new_folder = f'{base_folder}/exp{exp_num}/'
     os.makedirs(new_folder)
+
+    if opt.test_info:
+        with open(new_folder + 'info.txt', 'w') as file:
+            # Write test_info to the file
+            file.write(opt.test_info)
+
     
     return new_folder
 
