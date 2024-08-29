@@ -6,7 +6,7 @@ Final project BIU - Computer Engineering
 # Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 
 
-## Useful Information
+## Useful Information (Internal use for training)
 Article:
 'https://arxiv.org/pdf/1910.11908'
 
@@ -37,7 +37,6 @@ print("Contents of project directory:", os.listdir('.'))
 ```bash
 !pip install -r requirements.txt
 ```
-
 
 ### Push from Collab:
 
@@ -165,8 +164,8 @@ To use the Noisier2Noise code, you'll need to have Python and the necessary libr
 To train the model using the Noisier2Noise approach, you can use the `train.py` script. Below is an example command to start training:
 
 ```bash
-   python train.py \
-    --exp_detail "Train Nr2N public" \
+python train.py \
+    --exp_detail "Training with Gaussian noise intensity 25 on ImageNetGray" \
     --gpu_num 0 \
     --seed 100 \
     --load_model False \
@@ -218,84 +217,124 @@ An example containing all the parameters:
 
 ```bash
 python test.py \
+    --test_info "Running Set12 with Gaussian noise intensity 25" \
     --gpu_num 0 \
-    --seed 100 \
+    --seed 90 \
     --exp_num 10 \
     --n_epochs 180 \
-    --noise "poisson_50" \
+    --noise "gauss_25" \
     --dataset "Set12" \
+    --exp_rep "rep1" \
     --aver_num 10 \
     --alpha 1.0 \
+    --trim_op 0.05 \
     --crop True \
     --patch_size 256 \
     --normalize True \
-    --mean 0.4050 \
-    --std 0.2927 \
-    --use_overlap True
+    --mean 0.4097 \
+    --std 0.2719
 ```
 
-This command will load the trained model, apply it to the specified dataset, and output the denoised images along with performance metrics such as PSNR and SSIM.
-
-
 ### Explanation of Key Arguments
-
-Certainly! Here’s the completion for the missing arguments in your README:
-
-### Explanation of Key Arguments
-
-#### For `test.py`:
-
-- **`gpu_num`**: The GPU index to use (set to `0` for the first GPU).
-- **`seed`**: Seed for random number generation for reproducibility.
-- **`exp_num`**: Experiment number to identify the specific experiment configuration (used for saving and loading results).
-- **`n_epochs`**: Number of epochs for which the model was trained. This is used to specify which checkpoint to load.
-- **`noise`**: The type and intensity of noise to apply (e.g., `poisson_50` for Poisson noise with a specified intensity).
-- **`dataset`**: The name of the dataset to be used for testing (e.g., `Set12`).
-- **`aver_num`**: Number of times to average the results for a more stable performance evaluation.
-- **`alpha`**: Scaling factor used in the Noisier2Noise method to control the intensity of the additional synthetic noise.
-- **`crop`**: Whether to crop the images during testing (same as in training).
-- **`patch_size`**: Size of the image patches to use for testing.
-- **`normalize`**: Whether to normalize the image data.
-- **`mean` and `std`**: Mean and standard deviation for normalization.
-- **`use_overlap`**: Whether to use overlap between patches during testing, which can help in smoothing out the final predictions.
 
 #### For `train.py`:
 
-- **`exp_detail`**: Description of the experiment.
-- **`gpu_num`**: The GPU index to use (set to `0` for the first GPU).
-- **`seed`**: Seed for random number generation for reproducibility.
-- **`load_model`**: Whether to load a pre-trained model.
-- **`load_exp_num`**: The experiment number to identify which pre-trained model to load.
-- **`load_epoch`**: The specific epoch checkpoint to load the pre-trained model from.
-- **`n_epochs`**: Number of epochs to train the model.
-- **`start_epoch`**: Epoch to start training from, which is useful if continuing training from a checkpoint.
-- **`decay_epoch`**: The epoch after which the learning rate starts decaying.
-- **`batch_size`**: Number of samples per batch.
-- **`lr`**: Learning rate for the optimizer.
-- **`noise`**: The type and intensity of noise to apply during training.
-- **`crop`**: Whether to crop the images during training.
-- **`patch_size`**: Size of the image patches to use for training.
-- **`normalize`**: Whether to normalize the image data.
-- **`mean` and `std`**: Mean and standard deviation for normalization.
+- **`--exp_detail`**: A description of the experiment for logging and tracking purposes. Example: `"Train Nr2N public"`.
+- **`--gpu_num`**: The GPU index to use. Default is `0`, which refers to the first GPU.
+- **`--seed`**: Seed for random number generation to ensure reproducibility. Default is `100`.
+- **`--load_model`**: Boolean flag indicating whether to load a pre-trained model. Default is `False`.
+- **`--load_exp_num`**: The experiment number of the pre-trained model to load. Used in conjunction with `--load_model`. Default is `1`.
+- **`--load_epoch`**: The specific epoch of the pre-trained model to load. Used in conjunction with `--load_model`. Default is `500`.
+- **`--n_epochs`**: Number of epochs to train the model. Default is `500`.
+- **`--start_epoch`**: The epoch to start training from. Useful when continuing training from a checkpoint. Default is `0`.
+- **`--decay_epoch`**: The epoch after which the learning rate starts decaying. Default is `150`.
+- **`--batch_size`**: Number of samples per batch. Default is `4`.
+- **`--lr`**: Learning rate for the optimizer. Default is `0.001`.
+- **`--noise`**: Specifies the type and intensity of noise applied during training. Format: `'noise_type_intensity'`. Example: `'gauss_25'` or `'poisson_50'`. Default is `'gauss_25'`.
+- **`--crop`**: Boolean indicating whether to crop the images during training. Default is `True`.
+- **`--patch_size`**: Size of the image patches to use during training. Default is `256`.
+- **`--normalize`**: Boolean indicating whether to normalize the image data. Default is `True`.
+- **`--mean`**: Mean value used for normalization. Default is `0.4050`.
+- **`--std`**: Standard deviation used for normalization. Default is `0.2927`.
+
+#### For `test.py`:
+
+- **`--test_info`**: A string providing additional information about the test run. Default is `'None info given'`.
+- **`--gpu_num`**: The GPU index to use. Default is `0`, which refers to the first GPU.
+- **`--seed`**: Seed for random number generation to ensure reproducibility. Default is `90`.
+- **`--exp_num`**: Experiment number to identify the specific configuration used for the test. Default is `10`.
+- **`--n_epochs`**: Number of epochs for which the model was trained. Default is `180`.
+- **`--noise`**: Specifies the type and intensity of noise applied during the test. Format: `'noise_type_intensity'`. Example: `'gauss_25'` or `'poisson_50'`. Default is `'gauss_25'`.
+- **`--dataset`**: Name of the dataset used for testing. Examples include `Set12`, `BSD100`, and `Kodak`. Default is `Set12`.
+- **`--exp_rep`**: Experiment repetition identifier. This is an optional string that can be used to distinguish different runs of the same experiment. Default is `None`.
+- **`--aver_num`**: Number of averages to be used during testing to stabilize the performance evaluation. Default is `10`.
+- **`--alpha`**: A scaling factor for the synthetic noise intensity added during the test. Default is `1.0`.
+- **`--trim_op`**: A float value representing the trimming operation parameter. Used for trimming outliers in the overlap operations. Default is `0.05`.
+- **`--crop`**: Boolean indicating whether to crop the images during testing. Default is `True`.
+- **`--patch_size`**: Size of the image patches to use during testing. Default is `256`.
+- **`--normalize`**: Boolean indicating whether to normalize the image data. Default is `True`.
+- **`--mean`**: Mean value used for normalization. Default is `0.4097`.
+- **`--std`**: Standard deviation used for normalization. Default is `0.2719`.
 
 
 ## Results and Evaluation
-The Noisier2Noise method has been tested on various datasets, including the Kodak image set, and compared against other denoising methods such as Noise2Noise and BM3D. The results show that Noisier2Noise can achieve competitive performance, particularly in scenarios where obtaining clean images is impractical.
 
-## How to Evaluate (run test.py)
+The Noisier2Noise method has been tested on various datasets, including the Kodak image set, and compared against other denoising methods such as Noise2Noise and BM3D. The results demonstrate that Noisier2Noise can achieve competitive performance, particularly in scenarios where obtaining clean images is impractical.
 
-### Performance Metrics
+### How to Evaluate (run `test.py`)
 
-- **PSNR (Peak Signal-to-Noise Ratio)**: Measures the quality of the denoised image relative to the clean image.
-- **SSIM (Structural Similarity Index)**: Evaluates the structural similarity between the denoised and clean images.
+#### Performance Metrics
 
-### Visual Results
+- **PSNR (Peak Signal-to-Noise Ratio)**: Measures the quality of the denoised image relative to the clean image. Higher values indicate better quality.
+- **SSIM (Structural Similarity Index)**: Evaluates the structural similarity between the denoised and clean images. It considers changes in structural information, contrast, and luminance.
 
-The following images demonstrate the effectiveness of the Noisier2Noise approach (results folder):
-- **Clean Image**: The original clean image (not used in training/testing).
-- **Noisy Image**: The input image with noise added.
-- **Outputs Image**: The output from the Noisier2Noise model.
-- **Overlap Image**: The overlapping Noisier2Noise model outputs (aver_num times).
+#### Results Structure
+
+The results folder contains a variety of output images that illustrate the effectiveness of the Noisier2Noise approach. The structure is as follows:
+
+```bash
+project/
+└── results/
+    ├── results_summary.txt    # Summary of all results
+    ├── Set20/                 # Dataset-specific results
+    │   ├── imgs/                  # Directory containing result images
+    │   │   ├── exp5/                  # Experiment 5 results
+    │   │   │   ├── 1th_clean.png           # Clean image (reference)
+    │   │   │   ├── 1th_noisy.png           # Noisy image used as input
+    │   │   │   ├── 1th_prediction.png      # Denoised output from the model
+    │   │   │   ├── 1th_overlap_mean.png    # Overlap of predictions (mean operation)
+    │   │   │   ├── 1th_overlap_median.png  # Overlap of predictions (median operation)
+    │   │   │   ├── 1th_overlap_trimmed.png # Overlap of predictions (trimmed mean)
+    │   │   │   ├── ...                     # More images with similar naming
+    │   ├── csvs/                 # Directory containing CSV files for metrics
+    │   │   ├── exp5/                 # CSV files for experiment 5
+    │   │   │   ├── PSNR_1_1th_clean.csv      # PSNR metrics
+    │   │   │   ├── SSIM_1_1th_clean.csv      # SSIM metrics
+    │   │   │   ├── PSNR_all_images_average.csv # Average PSNR across all images
+    │   │   │   ├── SSIM_all_images_average.csv # Average SSIM across all images
+    │   ├── graphs/               # Directory for storing generated graphs
+    │   │   ├── exp5/                 # Graphs for experiment 5
+    │   │   │   ├── psnr_graph.png            # Graph of PSNR across different images
+    │   │   │   ├── ssim_graph.png            # Graph of SSIM across different images
+    │   │   │   └── ...                       # Additional graphs as needed
+```
+
+#### Visual Results
+
+The following images showcase the denoising capabilities of the Noisier2Noise model. Each step highlights the transformation from noisy input to the refined outputs using various aggregation methods.
+
+- **Clean Image**: The original clean image, used as the reference for evaluation.
+- **Noisy Image**: The input image with added noise.
+- **Prediction Image**: The output from the Noisier2Noise model after denoising.
+- **Overlap Mean Image**: The result of averaging multiple denoised outputs.
+- **Overlap Median Image**: The result of taking the median of multiple denoised outputs.
+- **Overlap Trimmed Mean Image**: The result of using a trimmed mean approach on multiple denoised outputs.
+
+#### Graphs
+The results also include graphs that provide a visual summary of the performance metrics:
+
+- **PSNR Graph**: A graph showing the PSNR values for each image in the dataset.
+- **SSIM Graph**: A graph showing the SSIM values for each image in the dataset.
 
 ## References
 

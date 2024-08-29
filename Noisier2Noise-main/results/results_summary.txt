@@ -1,0 +1,25 @@
+2 sets were used for inference:
+    - Set20 conating 5-10 images (more images were added)
+    - Set22 conating 100 images
+
+For each run we autogen files containg the results under `./results/Set{set_number}`
+
+Summary of the main tests run (as for 29/08/2024)
+Set20:
+    exp5 - Run for 0 < K < 31 complete (including trimmed means), trimming 5% on each side.
+        Note that only K > 15 the trimmed_mean produced different results that the regular mean
+
+    exp6 - Tested the alpha argument using K = 10, alpha = 1, noise = gauss_25, 
+        (alpha_values=(1.0 0.8 0.5 0.3 0.1 0.00001))
+    ...
+    exp11 - Tested the alpha argument using K = 10, alpha = 0.00001
+
+Set22:
+    exp1 - Run for 0 < K < 31 complete (excluding trimmed means)
+    exp2 - Tested the alpha argument using K = 10, alpha = 1, noise = gauss_25 
+        (alpha_values=(1.0 0.5 0.4 0.3 0.2 0.1) noise_values=(gauss_25 gauss_12.5 gauss_10 gauss_7.5 gauss_5 gauss_2.5))
+    ...
+    exp7 - Tested the alpha argument using K = 10, alpha = 0.1, noise = gauss_2.5
+
+    exp8 - Tested using noisy = noisier
+
