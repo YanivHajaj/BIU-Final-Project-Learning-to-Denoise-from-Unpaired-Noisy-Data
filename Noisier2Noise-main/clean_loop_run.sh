@@ -4,8 +4,8 @@
 folder_path="./csvs"
 
 # Parse command line arguments
-range_start=21
-range_end=30
+range_start=6
+range_end=20
 clean_flag=false
 graph_flag=false
 skip_run_flag=false
@@ -59,14 +59,14 @@ else
     # Run the loop
     for i in $(seq $range_start $range_end)
     do
-        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20 --exp_rep exp5 --test_info "testing trimmed" --aver_num $i
+        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set20 --exp_rep exp13 --test_info "testing median - quantile" --aver_num $i
     done
 fi
 
 # Check for the 'graph' parameter and perform the action if it's set
 if $graph_flag; then
     echo "Graph generation process initiated."
-    python3 graph.py
+    python3 graph.py --set Set20 --exp 13
 fi
 
 # usage example: 

@@ -136,9 +136,9 @@ def generate(args):
         overlap_prediction = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
 
         overlap_mean      = torch.mean(overlap_prediction, dim=0)
-        overlap_median, _ = torch.median(overlap_prediction, dim=0)
+        overlap_median    = torch.quantile(overlap_prediction, q=0.5, dim=0)
 
-        # Trimmed mean per pixel calculation - TODO: check if the sort is by pixel (not by image)
+        # Trimmed mean per pixel calculation 
         sorted_overlap, _ = torch.sort(overlap_prediction, dim=0)
         trim_percent = args.trim_op  # 10% trimming by default
         num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))

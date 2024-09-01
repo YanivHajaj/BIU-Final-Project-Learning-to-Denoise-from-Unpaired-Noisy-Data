@@ -1,0 +1,2 @@
+testing median - quantile
+{'test_info': 'testing median - quantile', 'gpu_num': 0, 'seed': 90, 'exp_num': 6, 'n_epochs': 200, 'noise': 'gauss_25', 'dataset': 'Set20', 'exp_rep': None, 'aver_num': 1, 'alpha': 1.0, 'trim_op': 0.05, 'noisy_input': False, 'crop': True, 'patch_size': 256, 'normalize': True, 'mean': 0.4097, 'std': 0.2719}
