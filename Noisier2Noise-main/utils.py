@@ -336,10 +336,10 @@ class LambdaLR:
 
 
 if __name__ == "__main__":
-    input_folder  = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set20'
-    output_folder = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set21'
+    input_folder  = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set30'
+    output_folder = '/Users/samynehmad/studies/final_project/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set30'
     # copy_large_images(input_folder, output_folder)
 
     # process_images_in_folder(input_folder, output_folder)
 
-    # convert_to_grayscale(input_folder, output_folder)
+    convert_to_grayscale(input_folder, output_folder)

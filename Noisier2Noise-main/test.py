@@ -140,18 +140,30 @@ def generate(args):
 
         # Trimmed mean per pixel calculation 
         sorted_overlap, _ = torch.sort(overlap_prediction, dim=0)
+
+        num_to_trim = 0
+
+        if i > 15:
+            num_to_trim = 2
+        elif i > 6:
+            num_to_trim = 1
+
+
         trim_percent = args.trim_op  # 10% trimming by default
-        num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))
+        # num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))
         
         # Ensure that trimming does not empty the tensor
-        if num_to_trim == 0 or 2 * num_to_trim >= sorted_overlap.size(0):
-            print(f"Trimming would result in an empty tensor or no trimming possible. Skipping trimming for this image.")
-            overlap_trimmed_mean = torch.mean(sorted_overlap, dim=0)  # No trimming applied
-        else:
+        # if num_to_trim == 0 or 2 * num_to_trim >= sorted_overlap.size(0):
+        #     print(f"Trimming would result in an empty tensor or no trimming possible. Skipping trimming for this image.")
+        #     overlap_trimmed_mean = torch.mean(sorted_overlap, dim=0)  # No trimming applied
+        # else:
+        if num_to_trim:
             trimmed_overlap = sorted_overlap[num_to_trim:-num_to_trim, :, :, :]
             overlap_trimmed_mean = torch.mean(trimmed_overlap, dim=0)  # Mean across the batch dimension after trimming
-            print(f"Trimmed tensor shape: {trimmed_overlap.size()}")
-            print(f"Calculated overlap_trimmed_mean: {overlap_trimmed_mean}")
+            print(f"Trimmed with num_to_trim : {num_to_trim}")
+        else:
+            overlap_trimmed_mean = overlap_mean
+        # print(f"Calculated overlap_trimmed_mean: {overlap_trimmed_mean}")
 
 
         # Change to Numpy
