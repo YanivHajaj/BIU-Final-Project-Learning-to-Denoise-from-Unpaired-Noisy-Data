@@ -59,7 +59,7 @@ else
     # Run the loop
     for i in $(seq $range_start $range_end)
     do
-        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set30 --exp_rep exp1 --test_info "giraffe" --aver_num $i
+        python3 test.py --exp_num 6 --n_epochs 200 --gpu_num 0 --dataset Set22 --exp_rep exp9  --test_info "run k 30 full" --aver_num $i
     done
 fi
 
