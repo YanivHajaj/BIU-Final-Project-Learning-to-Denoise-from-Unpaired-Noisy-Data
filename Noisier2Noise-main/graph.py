@@ -17,8 +17,11 @@ graph_path = os.path.join('./results', dataset, f'graphs/exp{experiment_num}')
 os.makedirs(graph_path, exist_ok=True)  # Create directory if it doesn't exist
 
 def plot_csv_graph(file_path, x_column, y_columns, name, save_path=None):
-    # Read the CSV file into a pandas DataFrame
-    data = pd.read_csv(file_path)
+    # Read the CSV file header first to get the column names
+    header = pd.read_csv(file_path, nrows=0).columns.tolist()
+
+    # Read the CSV file into a pandas DataFrame, skipping the first 9 rows but keeping the header
+    data = pd.read_csv(file_path, skiprows=9, names=header)
 
     # Plot the graph
     plt.figure(figsize=(10, 6))
@@ -45,8 +48,8 @@ if __name__ == "__main__":
     # Example usage
     file_path = os.path.join('./results', dataset, f'csvs/exp{experiment_num}/SSIM_all_images_average.csv')
     x_column = 'k'  # replace with your x-axis column name
-    y_columns = ['overlap_mean', 'overlap_median', 'overlap_trimmed_mean', 'prediction']  # replace with your y-axis column names
-    plot_csv_graph(file_path, x_column, y_columns, 'SSIM', os.path.join(graph_path, 'average_SSIM.png'))
+    y_columns = ['overlap_median', 'overlap_trimmed_mean', 'overlap_mean']  # replace with your y-axis column names
+    plot_csv_graph(file_path, x_column, y_columns, 'SSIM', os.path.join(graph_path, 'average_SSIM_no_prediction.png'))
 
     file_path = os.path.join('./results', dataset, f'csvs/exp{experiment_num}/PSNR_all_images_average.csv')
-    plot_csv_graph(file_path, x_column, y_columns, 'PSNR', os.path.join(graph_path, 'average_PSNR.png'))
+    plot_csv_graph(file_path, x_column, y_columns, 'PSNR', os.path.join(graph_path, 'average_PSNR_no_prediction.png'))
