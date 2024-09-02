@@ -136,34 +136,25 @@ def generate(args):
         overlap_prediction = ((1 + args.alpha ** 2) * model(noisier) - noisier) / (args.alpha ** 2)
 
         overlap_mean      = torch.mean(overlap_prediction, dim=0)
-        overlap_median    = torch.quantile(overlap_prediction, q=0.5, dim=0)
+        overlap_median, _ = torch.median(overlap_prediction, dim=0)
 
-        # Trimmed mean per pixel calculation 
+        identical, message = compare_tensors(overlap_median, overlap_mean)
+        print(message)
+
+        # Trimmed mean per pixel calculation - TODO: check if the sort is by pixel (not by image)
         sorted_overlap, _ = torch.sort(overlap_prediction, dim=0)
-
-        num_to_trim = 0
-
-        if i > 15:
-            num_to_trim = 2
-        elif i > 6:
-            num_to_trim = 1
-
-
         trim_percent = args.trim_op  # 10% trimming by default
-        # num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))
+        num_to_trim = math.floor(trim_percent * sorted_overlap.size(0))
         
         # Ensure that trimming does not empty the tensor
-        # if num_to_trim == 0 or 2 * num_to_trim >= sorted_overlap.size(0):
-        #     print(f"Trimming would result in an empty tensor or no trimming possible. Skipping trimming for this image.")
-        #     overlap_trimmed_mean = torch.mean(sorted_overlap, dim=0)  # No trimming applied
-        # else:
-        if num_to_trim:
+        if num_to_trim == 0 or 2 * num_to_trim >= sorted_overlap.size(0):
+            print(f"Trimming would result in an empty tensor or no trimming possible. Skipping trimming for this image.")
+            overlap_trimmed_mean = torch.mean(sorted_overlap, dim=0)  # No trimming applied
+        else:
             trimmed_overlap = sorted_overlap[num_to_trim:-num_to_trim, :, :, :]
             overlap_trimmed_mean = torch.mean(trimmed_overlap, dim=0)  # Mean across the batch dimension after trimming
-            print(f"Trimmed with num_to_trim : {num_to_trim}")
-        else:
-            overlap_trimmed_mean = overlap_mean
-        # print(f"Calculated overlap_trimmed_mean: {overlap_trimmed_mean}")
+            print(f"Trimmed tensor shape: {trimmed_overlap.size()}")
+            print(f"Calculated overlap_trimmed_mean: {overlap_trimmed_mean}")
 
 
         # Change to Numpy
@@ -179,6 +170,9 @@ def generate(args):
         noisier_numpy                                                                      = np.squeeze(noisier)  # Convert noisier tensor to numpy and squeeze
 
         image_metrics = calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy, overlap_trimmed_numpy)
+
+        compare_images(overlap_mean_numpy, overlap_median_numpy, './results/Set20/csvs/')
+        #compare_images(overlap_mean_numpy, overlap_mean_numpy, './results/Set20/csvs/')
 
         for metric_type in ['psnr', 'ssim']:
             averages = psnr_averages if metric_type == 'psnr' else ssim_averages
@@ -213,7 +207,7 @@ def generate(args):
 
 
         # Save sample images (up to 10 images)
-        if index <= 10:
+        if index <= 3:
             sample_clean, sample_noisy  = 255. * np.clip(clean_numpy, 0., 1.), 255. * np.clip(noisy_numpy, 0., 1.)
             sample_prediction           = 255. * np.clip(prediction_numpy, 0., 1.)
             sample_overlap_mean         = 255. * np.clip(overlap_mean_numpy, 0., 1.)
@@ -227,7 +221,15 @@ def generate(args):
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_mean.png'.format(index+1)), sample_overlap_mean)
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_median.png'.format(index+1)), sample_overlap_median)
             cv2.imwrite(os.path.join(save_dir, '{}th_overlap_trimmed.png'.format(index+1)), sample_overlap_trimmed)
-            cv2.imwrite(os.path.join(save_dir, '{}th_noisier.png'.format(index + 1)),sample_noisier)  # Save noisier image
+            cv2.imwrite(os.path.join(save_dir, '{}th_noisier.png'.format(index + 1)), sample_noisier)  # Save noisier image
+
+
+    # Assume sample_overlap_mean and sample_overlap_median are already calculated as shown in your snippet ~~~~~
+    #compare_images(sample_overlap_mean, sample_overlap_median, './results/Set20/csvs/')
+    # Assume sample_overlap_mean and sample_overlap_median are already calculated as shown in your snippet ~~~~~
+
+
+
 
     # Total PSNR, SSIM
     print('{} Average PSNR | noisy:{:.3f}, prediction:{:.3f}, overlap_mean:{:.3f}, overlap_median:{:.3f}, overlap_trimmed_mean:{:.3f}'.format(
@@ -301,6 +303,75 @@ def write_csv(file_path, data, header):
         if not file_exists:
             writer.writerow(header)
         writer.writerow(data)
+
+
+def compare_images(image1, image2, save_dir):
+    """
+    Compares two images pixel by pixel and saves the comparison result to a file.
+
+    Parameters:
+    image1 (numpy.ndarray): First image array.
+    image2 (numpy.ndarray): Second image array.
+    save_dir (str): Directory to save the comparison results.
+
+    Returns:
+    None
+    """
+    # Ensure the same shape and type
+    if image1.shape != image2.shape:
+        print("Images have different shapes.")
+        return
+
+    # Comparison
+    difference = np.abs(image1 - image2)
+    identical = np.all(difference == 0)
+
+    # Save the comparison result
+    result_path = os.path.join(save_dir, 'comparison_result.txt')
+    with open(result_path, 'w') as file:
+        if identical:
+            file.write("Images are identical.\n")
+        else:
+            file.write("Images are not identical.\n")
+            # Optionally, save the difference image for further analysis
+            diff_image_path = os.path.join(save_dir, 'difference_image.png')
+            diff_image = 255 * np.clip(difference, 0, 1)  # Scale difference for visibility
+            cv2.imwrite(diff_image_path, diff_image)
+
+            # Detailed report of the differences
+            non_zero_indices = np.where(difference != 0)
+            for y, x in zip(*non_zero_indices):
+                file.write(f"Difference at ({y}, {x}): {image1[y, x]} vs {image2[y, x]}\n")
+
+    print(f"Comparison result saved. Check {result_path} for details.")
+
+
+def compare_tensors(tensor1, tensor2, epsilon=1e-8):
+    """
+    Compares two tensors element-wise to see if they are identical within a small epsilon range.
+
+    Parameters:
+        tensor1 (torch.Tensor): The first tensor to compare.
+        tensor2 (torch.Tensor): The second tensor to compare.
+        epsilon (float): The tolerance for difference between elements (default is very small).
+
+    Returns:
+        bool: True if identical, False otherwise.
+        str: A message describing the result of the comparison.
+    """
+    if tensor1.shape != tensor2.shape:
+        return False, "Tensors have different shapes."
+
+    difference = torch.abs(tensor1 - tensor2)
+    max_diff = torch.max(difference)
+    if max_diff < epsilon:
+        return True, "Tensors are identical."
+    else:
+        differences = torch.where(difference >= epsilon)
+        diff_values = difference[differences]
+        message = f"Tensors are not identical. Maximum difference is {max_diff.item()}."
+        message += f"\nIndices of differences: {differences}\nDifference values: {diff_values}"
+        return False, message
 
 
 def calculate_metrics(clean_numpy, noisy_numpy, prediction_numpy, overlap_mean_numpy, overlap_median_numpy, noisier_numpy, overlap_trimmed_numpy):
