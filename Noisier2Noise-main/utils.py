@@ -5,6 +5,7 @@ import numpy as np
 import os
 import shutil
 import torch
+from PIL import Image
 
 from torchvision.transforms import transforms
 
@@ -247,6 +248,50 @@ def crop(img, patch_size):
         return img[:, h//2-patch_size//2:h//2+patch_size//2, w//2-patch_size//2:w//2+patch_size//2]
     else:
         raise NotImplementedError('Wrong image dim')
+
+
+def crop_and_resize(img, output_size=256, grayscale=False):
+    """
+    Crops the center of an image based on the shortest side, then resizes it to the specified size.
+    Optionally converts to grayscale.
+
+    Parameters:
+    img (PIL.Image or numpy.ndarray): The input image.
+    output_size (int): The size to resize the image to (default is 256x256).
+    grayscale (bool): Whether to convert the image to grayscale.
+
+    Returns:
+    PIL.Image: The cropped and resized image.
+    """
+    # Convert to grayscale if required
+    if grayscale and isinstance(img, Image.Image):
+        img = img.convert('L')
+    elif grayscale and isinstance(img, np.ndarray):
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Convert to numpy array if PIL image
+    if isinstance(img, Image.Image):
+        img = np.array(img)
+
+    # Get the dimensions of the image
+    height, width = img.shape[:2]
+
+    # Determine the shortest side to make a square crop
+    shortest_side = min(width, height)
+
+    # Calculate the cropping box (centered)
+    left = (width - shortest_side) // 2
+    upper = (height - shortest_side) // 2
+    right = left + shortest_side
+    lower = upper + shortest_side
+
+    # Crop the image to a square
+    img_cropped = img[upper:lower, left:right]
+
+    # Resize the cropped image to the desired output size
+    img_resized = cv2.resize(img_cropped, (output_size, output_size))
+
+    return img_resized
 
 
 ################################# ETC #################################

@@ -89,7 +89,8 @@ def generate(args):
 
     for index, clean255 in enumerate(imgs):
         if args.crop:
-            clean255 = crop(clean255, patch_size=args.patch_size)
+            #clean255 = crop(clean255, patch_size=args.patch_size)
+            clean255 = crop_and_resize(clean255, output_size=args.patch_size)
 
         clean_numpy = clean255/255.
         if noise_type == 'gauss':

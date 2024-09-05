@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3e401760-daa1-4847-8e19-b2ec6b9d351e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Project - First Report 2.9.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Final Project - First Report 2.9.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/practice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noisier2Noise-main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Noisier2Noise-main/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_datasets/Set30/giraffe.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2kfoLDHaomTRxBvomy139alYtSl" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -25,15 +33,19 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaniv/Documents/GitHub/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/Noisier2Noise-main/experiments&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaniv/Documents/GitHub/BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data/all_datasets/Set30&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set30" />
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set100" />
       <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\Noisier2Noise-main\experiments" />
       <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set20" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set100" />
+      <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\Set30" />
       <recent name="C:\Users\yaniv\Documents\GitHub\BIU-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data\all_datasets\new_pictures" />
     </key>
   </component>

@@ -11,11 +11,11 @@ def crop_image(image_path, output_path, crop_box):
     cropped_image.save(output_path)
 
 # Define the paths for the two images and their respective output paths
-image1_path = r".\results\Set22\imgs\exp9\1th_overlap_mean.png"
-output1_path = r".\results\Set22\imgs\exp9\1th_overlap_mean_cropped4.png"
+image1_path = r".\results\Set30\imgs\exp7\1th_overlap_mean.png"
+output1_path = r".\results\Set30\imgs\exp7\1th_overlap_mean_cropped.png"
 
-image2_path = r".\results\Set22\imgs\exp9\1th_prediction.png"
-output2_path = r".\results\Set22\imgs\exp9\1th_prediction_cropped4.png"
+image2_path = r".\results\Set30\imgs\exp7\1th_prediction.png"
+output2_path = r".\results\Set30\imgs\exp7\1th_prediction_cropped.png"
 
 # = r".\results\Set22\imgs\exp9\1th_clean.png"
 #output3_path = r".\results\Set22\imgs\exp9\1th_clean_cropped2.png"
