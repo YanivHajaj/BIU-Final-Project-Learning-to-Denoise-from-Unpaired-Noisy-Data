@@ -1,7 +1,7 @@
 # BIU-University-Final-Project-Learning-to-Denoise-from-Unpaired-Noisy-Data
 Final project BIU - Computer Engineering
+- Yaniv Hajaj (yanivhjj@gmail.com)
 - Samy Nehmad (samy.nehmad1@gmail.com)
-- Yaniv Hajaj (yaniv3456@gmail.com)
 
 # Noisier2Noise: Learning to Denoise from Unpaired Noisy Data
 GIT repo link:
